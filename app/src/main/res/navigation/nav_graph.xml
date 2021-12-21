@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/singInFragment">
+
+    <fragment
+        android:id="@+id/singInFragment"
+        android:name="com.example.knowmeapp.auth.SingInFragment"
+        android:label="fragment_sing_in"
+        tools:layout="@layout/fragment_sing_in" >
+        <action
+            android:id="@+id/action_singInFragment_to_listOfContactFragment"
+            app:destination="@id/listOfContactFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listOfContactFragment"
+        android:name="com.example.knowmeapp.ListOfContactFragment"
+        android:label="fragment_list_of_contact"
+        tools:layout="@layout/fragment_list_of_contact" >
+        <action
+            android:id="@+id/action_listOfContactFragment_to_singInFragment"
+            app:destination="@id/singInFragment" />
+    </fragment>
+</navigation>
