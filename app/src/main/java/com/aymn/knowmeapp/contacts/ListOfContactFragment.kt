@@ -1,9 +1,10 @@
-package com.example.knowmeapp
+package com.aymn.knowmeapp.contacts
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.knowmeapp.R
 import com.example.knowmeapp.databinding.FragmentListOfContactBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -37,27 +38,27 @@ class ListOfContactFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem) =when(item.itemId){
-        R.id.singOut -> {
-            singOut()
+        R.id.userProfile -> {
+            val actionUserProfile = ListOfContactFragmentDirections.actionListOfContactFragmentToUserInfoFragment()
+            findNavController().navigate(actionUserProfile)
         true
         }
         else -> false
     }
-
-
+    /*
+    *
+    * */
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         auth = Firebase.auth
-        binding?.textView?.text = "${auth.currentUser?.displayName}"
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.web_clint_id))
             .requestEmail().build()
 
         googleSignInClient = GoogleSignIn.getClient(context,gso)
-
-
     }
+
     private fun singOut(){
         Firebase.auth.signOut()
         googleSignInClient.signOut()

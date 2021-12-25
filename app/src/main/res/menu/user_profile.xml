@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
         <item
-            android:id="@+id/singOut"
+            android:id="@+id/userProfile"
             app:showAsAction="always"
-            android:title="singout"
+            android:title="user profile"
             android:icon="@drawable/ic_baseline_account_circle_24"
             />
 </menu>

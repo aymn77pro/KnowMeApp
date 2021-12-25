@@ -9,10 +9,18 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        relese {
+            storeFile file('C:\\Users\\aymn7\\Desktop\\knowMeRels.jks')
+            storePassword '123456789'
+            keyAlias 'key0'
+            keyPassword '123456789'
+        }
+    }
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.knowmeapp"
+        applicationId "com.aymn.knowmeapp"
         minSdk 28
         targetSdk 31
         versionCode 1
@@ -25,6 +33,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.relese
         }
     }
     compileOptions {

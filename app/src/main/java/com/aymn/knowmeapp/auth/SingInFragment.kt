@@ -1,4 +1,4 @@
-package com.example.knowmeapp.auth
+package com.aymn.knowmeapp.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -50,6 +50,10 @@ class SingInFragment : Fragment() {
         binding?.signInButton?.setOnClickListener {
             signIn()
         }
+        if (auth.currentUser != null ){
+            val action = SingInFragmentDirections.actionSingInFragmentToListOfContactFragment()
+            findNavController().navigate(action)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -60,7 +64,7 @@ class SingInFragment : Fragment() {
                 val account = task.getResult(ApiException::class.java)!!
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: Exception) {
-                Toast.makeText(context, "error in onActivityResult", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "error in singIn", Toast.LENGTH_SHORT).show()
             }
         }
     }

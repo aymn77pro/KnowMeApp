@@ -2,4 +2,6 @@
     <string name="app_name">KnowMeApp</string>
     <!-- Strings related to login -->
     <string name="web_clint_id">366299009420-v3n82kjgnr87ldcgmbd4l2dsahui4uuc.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

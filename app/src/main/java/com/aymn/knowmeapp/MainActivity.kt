@@ -1,10 +1,11 @@
-package com.example.knowmeapp
+package com.aymn.knowmeapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.example.knowmeapp.R
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController

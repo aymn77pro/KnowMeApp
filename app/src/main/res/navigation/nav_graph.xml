@@ -7,20 +7,71 @@
 
     <fragment
         android:id="@+id/singInFragment"
-        android:name="com.example.knowmeapp.auth.SingInFragment"
-        android:label="fragment_sing_in"
-        tools:layout="@layout/fragment_sing_in" >
+        android:name="com.aymn.knowmeapp.auth.SingInFragment"
+        android:label="sing in"
+        tools:layout="@layout/fragment_sing_in">
         <action
             android:id="@+id/action_singInFragment_to_listOfContactFragment"
             app:destination="@id/listOfContactFragment" />
     </fragment>
     <fragment
         android:id="@+id/listOfContactFragment"
-        android:name="com.example.knowmeapp.ListOfContactFragment"
-        android:label="fragment_list_of_contact"
-        tools:layout="@layout/fragment_list_of_contact" >
+        android:name="com.aymn.knowmeapp.contacts.ListOfContactFragment"
+        android:label="my contact "
+        tools:layout="@layout/fragment_list_of_contact">
         <action
             android:id="@+id/action_listOfContactFragment_to_singInFragment"
             app:destination="@id/singInFragment" />
+        <action
+            android:id="@+id/action_listOfContactFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
+        <action
+            android:id="@+id/action_listOfContactFragment_to_parsoneInfoFragment"
+            app:destination="@id/parsoneInfoFragment" />
+        <action
+            android:id="@+id/action_listOfContactFragment_to_editParsoneInfoFragment"
+            app:destination="@id/editParsoneInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userInfoFragment"
+        android:name="com.aymn.knowmeapp.userInfo.UserInfoFragment"
+        android:label="user profile"
+        tools:layout="@layout/fragment_user_info">
+        <action
+            android:id="@+id/action_userInfoFragment_to_singInFragment"
+            app:destination="@id/singInFragment" />
+        <action
+            android:id="@+id/action_userInfoFragment_to_listOfContactFragment"
+            app:destination="@id/listOfContactFragment" />
+        <action
+            android:id="@+id/action_userInfoFragment_to_userEditInnfoFragment"
+            app:destination="@id/userEditInnfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userEditInnfoFragment"
+        android:name="com.aymn.knowmeapp.userInfo.UserEditInnfoFragment"
+        android:label="fragment_user_edit_innfo"
+        tools:layout="@layout/fragment_user_edit_innfo" >
+        <action
+            android:id="@+id/action_userEditInnfoFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/parsoneInfoFragment"
+        android:name="com.aymn.knowmeapp.contacts.PersonInfoFragment"
+        android:label="fragment_parsone_info"
+        tools:layout="@layout/fragment_parsone_info" >
+        <action
+            android:id="@+id/action_parsoneInfoFragment_to_editParsoneInfoFragment"
+            app:destination="@id/editParsoneInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editParsoneInfoFragment"
+        android:name="com.aymn.knowmeapp.contacts.EditPersonInfoFragment"
+        android:label="fragment_edit_parsone_info"
+        tools:layout="@layout/fragment_edit_person_info" >
+        <action
+            android:id="@+id/action_editParsoneInfoFragment_to_listOfContactFragment"
+            app:destination="@id/listOfContactFragment" />
     </fragment>
 </navigation>
