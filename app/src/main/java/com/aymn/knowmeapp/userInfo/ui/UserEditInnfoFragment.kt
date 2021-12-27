@@ -1,4 +1,4 @@
-package com.aymn.knowmeapp.userInfo
+package com.aymn.knowmeapp.userInfo.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

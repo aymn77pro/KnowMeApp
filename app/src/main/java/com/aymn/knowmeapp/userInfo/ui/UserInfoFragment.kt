@@ -1,4 +1,4 @@
-package com.aymn.knowmeapp.userInfo
+package com.aymn.knowmeapp.userInfo.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.knowmeapp.R
-import com.example.knowmeapp.databinding.FragmentListOfContactBinding
 import com.example.knowmeapp.databinding.FragmentUserInfoBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient

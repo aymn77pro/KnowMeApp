@@ -4,11 +4,14 @@ plugins {
     id 'com.google.gms.google-services'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
-
-
 }
 
 android {
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+
     signingConfigs {
         relese {
             storeFile file('C:\\Users\\aymn7\\Desktop\\knowMeRels.jks')

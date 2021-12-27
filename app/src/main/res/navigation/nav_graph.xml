@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/userInfoFragment"
-        android:name="com.aymn.knowmeapp.userInfo.UserInfoFragment"
+        android:name="com.aymn.knowmeapp.userInfo.ui.UserInfoFragment"
         android:label="user profile"
         tools:layout="@layout/fragment_user_info">
         <action
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/userEditInnfoFragment"
-        android:name="com.aymn.knowmeapp.userInfo.UserEditInnfoFragment"
+        android:name="com.aymn.knowmeapp.userInfo.ui.UserEditInnfoFragment"
         android:label="fragment_user_edit_innfo"
         tools:layout="@layout/fragment_user_edit_innfo" >
         <action
