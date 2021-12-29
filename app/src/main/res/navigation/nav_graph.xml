@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/singInFragment"
-        android:name="com.aymn.knowmeapp.auth.SingInFragment"
+        android:name="com.aymn.knowmeapp.auth.ui.SingInFragment"
         android:label="sing in"
         tools:layout="@layout/fragment_sing_in">
         <action

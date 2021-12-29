@@ -1,4 +1,4 @@
-package com.aymn.knowmeapp.auth
+package com.aymn.knowmeapp.auth.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 private const val RC_SIGN_IN = 9001
@@ -27,6 +28,7 @@ class SingInFragment : Fragment() {
     private val binding get() = _binding
 
     private lateinit var auth: FirebaseAuth
+
     lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreateView(
@@ -44,7 +46,7 @@ class SingInFragment : Fragment() {
             .requestIdToken(getString(R.string.web_clint_id))
             .requestEmail().build()
 
-        googleSignInClient = GoogleSignIn.getClient(context, gso)
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
         auth = Firebase.auth
 
         binding?.signInButton?.setOnClickListener {

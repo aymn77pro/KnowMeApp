@@ -20,7 +20,7 @@
             app:layout_constraintBottom_toTopOf="@id/add_parsone"
             />
 
-        <TextView
+        <Button
             android:id="@+id/add_parsone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
