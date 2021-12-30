@@ -14,7 +14,7 @@ class UserInfoViewModel(private val setUserInfoUseCase: SetUserInfoUseCase, priv
 var _user= MutableStateFlow(UserInformation())
     val user:StateFlow<UserInformation> = _user.asStateFlow()
 
-//    val name = MutableLiveData<String>()
+    val name = MutableLiveData<String>()
 //    val phone = MutableLiveData<String>("")
 //    val email = MutableLiveData<String>()
 //    val LinkIn = MutableLiveData<String>("")

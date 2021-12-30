@@ -4,9 +4,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 data class UserInformation(
-    val name : String = Firebase.auth.currentUser?.displayName.toString(),
+    val name : String ="",
     val number : String = "",
-    val email : String= Firebase.auth.currentUser?.email.toString(),
+    val email : String= "",
     val linkIn : String = "",
     val twitter : String = "",
     val faceBook : String = ""

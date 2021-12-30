@@ -25,9 +25,10 @@ import java.util.*
 import kotlin.concurrent.timerTask
 
 
-class UserEditInnfoFragment : Fragment() {
-    private var _binding : FragmentUserEditInnfoBinding ?= null
-    private val binding get() = _binding
+    class UserEditInnfoFragment : Fragment() {
+
+        private var _binding : FragmentUserEditInnfoBinding ?= null
+        private val binding get() = _binding
 
     private val viewModel : UserInfoViewModel by activityViewModels {
         ViewModelFactory()
@@ -44,23 +45,8 @@ class UserEditInnfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getUserInfo()
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.CREATED){
-                viewModel.user.collect{
-
-                }
-            }
-        }
-//        //if (binding?.Name?.text.toString().isBlank()){
-//            binding?.Name?.setText(Firebase.auth.currentUser?.displayName)
-//        }
-//        //if (binding?.Email?.text!!.isBlank()){
-//            binding?.Email?.setText(Firebase.auth.currentUser?.email)
-//        }
-
-
+        viewModel.name.value = binding?.Name?.text.toString()
 
         binding?.button?.setOnClickListener {
             viewModel.getUserInfo(binding?.Name?.text.toString(), binding?.Number?.text.toString(), binding?.Email?.text.toString(),

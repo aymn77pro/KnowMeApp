@@ -12,22 +12,25 @@
         tools:layout="@layout/fragment_sing_in">
         <action
             android:id="@+id/action_singInFragment_to_listOfContactFragment"
-            app:destination="@id/listOfContactFragment" />
+            app:destination="@id/listOfPersonsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/listOfContactFragment"
-        android:name="com.aymn.knowmeapp.contacts.ListOfContactFragment"
+        android:id="@+id/listOfPersonsFragment"
+        android:name="com.aymn.knowmeapp.persons.ui.ListOfPersonsFragment"
         android:label="my contact "
-        tools:layout="@layout/fragment_list_of_contact">
+        tools:layout="@layout/fragment_list_of_persons">
         <action
             android:id="@+id/action_listOfContactFragment_to_singInFragment"
             app:destination="@id/singInFragment" />
         <action
-            android:id="@+id/action_listOfContactFragment_to_userInfoFragment"
+            android:id="@+id/action_listOfPersonsFragment_to_userInfoFragment"
             app:destination="@id/userInfoFragment" />
         <action
-            android:id="@+id/action_listOfContactFragment_to_parsoneInfoFragment"
+            android:id="@+id/action_listOfPersonsFragment_to_parsoneInfoFragment"
             app:destination="@id/parsoneInfoFragment" />
+        <action
+            android:id="@+id/action_listOfPersonsFragment_to_editParsoneInfoFragment"
+            app:destination="@id/editParsoneInfoFragment" />
         <action
             android:id="@+id/action_listOfContactFragment_to_editParsoneInfoFragment"
             app:destination="@id/editParsoneInfoFragment" />
@@ -42,7 +45,7 @@
             app:destination="@id/singInFragment" />
         <action
             android:id="@+id/action_userInfoFragment_to_listOfContactFragment"
-            app:destination="@id/listOfContactFragment" />
+            app:destination="@id/listOfPersonsFragment" />
         <action
             android:id="@+id/action_userInfoFragment_to_userEditInnfoFragment"
             app:destination="@id/userEditInnfoFragment" />
@@ -58,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/parsoneInfoFragment"
-        android:name="com.aymn.knowmeapp.contacts.PersonInfoFragment"
+        android:name="com.aymn.knowmeapp.persons.ui.PersonInfoFragment"
         android:label="fragment_parsone_info"
         tools:layout="@layout/fragment_parsone_info" >
         <action
@@ -67,11 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/editParsoneInfoFragment"
-        android:name="com.aymn.knowmeapp.contacts.EditPersonInfoFragment"
+        android:name="com.aymn.knowmeapp.persons.ui.EditPersonInfoFragment"
         android:label="fragment_edit_parsone_info"
-        tools:layout="@layout/fragment_edit_person_info" >
-        <action
-            android:id="@+id/action_editParsoneInfoFragment_to_listOfContactFragment"
-            app:destination="@id/listOfContactFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_edit_person_info" />
 </navigation>

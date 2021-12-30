@@ -50,6 +50,12 @@ class UserInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (viewModel.user.value.name.isBlank()){
+            val action = UserInfoFragmentDirections.actionUserInfoFragmentToUserEditInnfoFragment()
+            findNavController().navigate(action)
+        }
+
         auth = Firebase.auth
 
 //        if (viewModel.user.value.name == null){
@@ -76,7 +82,6 @@ class UserInfoFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED){
                 viewModel.user.collect{
-                   // Toast.makeText(this@UserInfoFragment.requireContext(),"${it.number+"${viewModel.user.value.number}"}",Toast.LENGTH_LONG).show()
                     binding?.userName?.setText(viewModel.user.value.name)
                     binding?.userEmail?.setText(viewModel.user.value.email)
                     binding?.userPhone?.setText(viewModel.user.value.number)

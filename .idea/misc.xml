@@ -5,7 +5,9 @@
       <map>
         <entry key="..\:/Users/aymn7/AndroidStudioProjects/KnowMeApp/app/src/main/res/layout/activity_main.xml" value="0.1296875" />
         <entry key="..\:/Users/aymn7/AndroidStudioProjects/KnowMeApp/app/src/main/res/layout/fragment_edit_parsone_info.xml" value="0.2453125" />
-        <entry key="..\:/Users/aymn7/AndroidStudioProjects/KnowMeApp/app/src/main/res/layout/fragment_list_of_contact.xml" value="0.1" />
+        <entry key="..\:/Users/aymn7/AndroidStudioProjects/KnowMeApp/app/src/main/res/layout/fragment_edit_person_info.xml" value="0.259375" />
+        <entry key="..\:/Users/aymn7/AndroidStudioProjects/KnowMeApp/app/src/main/res/layout/fragment_list_of_contact.xml" value="0.2" />
+        <entry key="..\:/Users/aymn7/AndroidStudioProjects/KnowMeApp/app/src/main/res/layout/fragment_list_of_persons.xml" value="0.259375" />
         <entry key="..\:/Users/aymn7/AndroidStudioProjects/KnowMeApp/app/src/main/res/layout/fragment_login.xml" value="0.4" />
         <entry key="..\:/Users/aymn7/AndroidStudioProjects/KnowMeApp/app/src/main/res/layout/fragment_parsone_info.xml" value="0.2453125" />
         <entry key="..\:/Users/aymn7/AndroidStudioProjects/KnowMeApp/app/src/main/res/layout/fragment_sing_in.xml" value="0.4" />

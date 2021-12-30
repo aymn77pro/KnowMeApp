@@ -10,28 +10,28 @@ import kotlinx.coroutines.flow.callbackFlow
 
 
 class UserInfoDataSource(
-    private val firebaseDB: FirebaseFirestore,
+    private val firebaseDB: FirebaseFirestore
     ) : UserInfo {
 //--------------------------------------------------------------------------------//
+    val db = firebaseDB
+    val auth = Firebase.auth.currentUser?.email
     override suspend fun setUserInfo(userInfo: UserInformation){
-        val db = firebaseDB
-        val auth = Firebase.auth
-        val d= auth.uid
-        db.collection("users").document("$d").set(userInfo).addOnCompleteListener {
+
+        db.collection("users").document("${auth}").set(userInfo).addOnCompleteListener {
             Log.d("TAG", "setUserInfo: ${it.isSuccessful}")
         }.addOnFailureListener {  }
     }
 //---------------------------------------------------------------------------------------------------------------------//
+
+
     override suspend fun getUserInfo(): Flow<UserInformation> = callbackFlow {
 
-        val db = firebaseDB
-        val auth = Firebase.auth
-    val d= auth.currentUser?.email.toString()
-        db.collection("users").document("${auth.uid}").get()
+        db.collection("users").document("${auth}").get()
             .addOnSuccessListener {
                 val userInfo = it.toObject(UserInformation::class.java)
                 if (userInfo != null){
                     trySend(userInfo)
+
                 }else if (userInfo == null){
                     Log.e("TAG","why null:${userInfo}")
                 }
