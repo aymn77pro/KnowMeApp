@@ -1,31 +1,17 @@
 package com.aymn.knowmeapp.userInfo.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.aymn.knowmeapp.ViewModelFactory
-import com.aymn.knowmeapp.network.model.UserInformation
-import com.aymn.knowmeapp.userInfo.data.UserInfo
-import com.example.knowmeapp.R
 import com.example.knowmeapp.databinding.FragmentUserEditInnfoBinding
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import java.util.*
-import kotlin.concurrent.timerTask
 
 
-    class UserEditInnfoFragment : Fragment() {
+class UserEditInnfoFragment : Fragment() {
 
         private var _binding : FragmentUserEditInnfoBinding ?= null
         private val binding get() = _binding
@@ -47,9 +33,16 @@ import kotlin.concurrent.timerTask
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.name.value = binding?.Name?.text.toString()
+        binding?.Name?.setText(viewModel.user.value.name)
+        binding?.number?.setText(viewModel.user.value.number)
+        binding?.Email?.setText(viewModel.user.value.email)
+        binding?.LinkIn?.setText(viewModel.user.value.linkIn)
+            binding?.Twitter?.setText(viewModel.user.value.twitter)
+        binding?.FaceBook?.setText(viewModel.user.value.faceBook)
 
-        binding?.button?.setOnClickListener {
-            viewModel.getUserInfo(binding?.Name?.text.toString(), binding?.Number?.text.toString(), binding?.Email?.text.toString(),
+
+        binding?.save?.setOnClickListener {
+            viewModel.setNewUserInfo(binding?.Name?.text.toString(), binding?.number?.text.toString(), binding?.Email?.text.toString(),
                   binding?.LinkIn?.text.toString(), binding?.Twitter?.text.toString(),binding?.FaceBook?.text.toString())
 
             val action = UserEditInnfoFragmentDirections.actionUserEditInnfoFragmentToUserInfoFragment()
