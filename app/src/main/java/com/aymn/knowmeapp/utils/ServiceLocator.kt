@@ -2,6 +2,7 @@ package com.aymn.knowmeapp.utils
 
 import com.aymn.knowmeapp.persons.data.PersonRepository
 import com.aymn.knowmeapp.persons.data.PersoneDataSource
+import com.aymn.knowmeapp.persons.domain.AddPersonUseCase
 import com.aymn.knowmeapp.persons.domain.GetPersonDataUseCase
 import com.aymn.knowmeapp.persons.domain.SetPersonDataUseCase
 import com.aymn.knowmeapp.userInfo.data.UserInfoDataSource
@@ -27,3 +28,5 @@ fun providerPersonRepository():PersonRepository = PersonRepository(providerPerso
 fun providerSetPersonDataUseCase():SetPersonDataUseCase = SetPersonDataUseCase(providerPersonRepository())
 
 fun providerGetPersonDataUseCase():GetPersonDataUseCase = GetPersonDataUseCase(providerPersonRepository())
+
+fun providerAddPersonDataUseCase():AddPersonUseCase = AddPersonUseCase(providerPersonRepository())

@@ -7,5 +7,7 @@ interface PersonData {
 
     suspend fun setPersonInformation(personInformation:PersonInformation)
 
-    suspend fun getPersonsData(): Flow<PersonInformation>
+    suspend fun getPersonsData(): Flow<List<PersonInformation>>
+
+   // suspend fun addPersonData(name:String):Flow<PersonInformation>
 }

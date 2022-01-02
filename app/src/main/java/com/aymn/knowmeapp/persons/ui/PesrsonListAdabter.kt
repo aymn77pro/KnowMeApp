@@ -10,15 +10,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aymn.knowmeapp.network.model.PersonInformation
 import com.example.knowmeapp.R
-import com.example.knowmeapp.databinding.FragmentListOfPersonsBinding
-import com.example.knowmeapp.databinding.PersonItemBinding
+import com.example.knowmeapp.databinding.PersonItem1Binding
 
-//(private val onPersonInfoClicke:(PersonInformation) -> Unit)
 class PesrsonListAdabter(private val context: Context):
 ListAdapter<PersonInformation,PesrsonListAdabter.PersonViewHolder>(DiffCallBack){
 
 
-    class PersonViewHolder(private val binding:PersonItemBinding):RecyclerView.ViewHolder(binding.root){
+    class PersonViewHolder(private val binding:PersonItem1Binding):RecyclerView.ViewHolder(binding.root){
         val card:CardView = itemView.findViewById(R.id.cerdView)
         fun bind(personInformation: PersonInformation){
             binding.name.text = personInformation.Name
@@ -30,10 +28,11 @@ ListAdapter<PersonInformation,PesrsonListAdabter.PersonViewHolder>(DiffCallBack)
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): PesrsonListAdabter.PersonViewHolder {
+    ): PersonViewHolder {
         return PersonViewHolder(
-            PersonItemBinding.inflate(LayoutInflater.from(parent.context))
+           PersonItem1Binding.inflate(LayoutInflater.from(parent.context))
         )
+
     }
 
     override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
@@ -52,7 +51,7 @@ ListAdapter<PersonInformation,PesrsonListAdabter.PersonViewHolder>(DiffCallBack)
     companion object {
         private val DiffCallBack = object : DiffUtil.ItemCallback<PersonInformation>() {
             override fun areItemsTheSame(oldItem: PersonInformation, newItem: PersonInformation): Boolean {
-                return oldItem === newItem
+                return oldItem.Name == newItem.Name
             }
 
             override fun areContentsTheSame(oldItem: PersonInformation, newItem: PersonInformation): Boolean {

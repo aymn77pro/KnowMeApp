@@ -43,6 +43,8 @@ class EditPersonInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.save?.setOnClickListener {
+            val namePerson = _binding?.personeName?.text.toString()
+           // viewModel.addPersonInfo(namePerson)
 
             if ( binding?.personeName?.text.toString().isBlank()){
                 binding?.personNameText?.isErrorEnabled = true

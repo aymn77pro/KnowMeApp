@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class UserInfoViewModel(private val setUserInfoUseCase: SetUserInfoUseCase, private val getUserInfoUseCase: GetUserInfoUseCase):ViewModel() {
-var _user= MutableStateFlow(UserInformation())
+private var _user= MutableStateFlow(UserInformation())
     val user:StateFlow<UserInformation> = _user.asStateFlow()
 
     val name = MutableLiveData<String>("")
@@ -20,6 +20,7 @@ var _user= MutableStateFlow(UserInformation())
     val LinkIn = MutableLiveData<String>("")
     val twitter = MutableLiveData<String>("")
     val faceBook = MutableLiveData<String>("")
+
 
 
 
