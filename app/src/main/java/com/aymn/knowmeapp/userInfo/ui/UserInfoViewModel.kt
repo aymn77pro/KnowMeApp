@@ -11,45 +11,39 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class UserInfoViewModel(private val setUserInfoUseCase: SetUserInfoUseCase, private val getUserInfoUseCase: GetUserInfoUseCase):ViewModel() {
-var _user= MutableStateFlow(UserInformation())
+private var _user= MutableStateFlow(UserInformation())
     val user:StateFlow<UserInformation> = _user.asStateFlow()
 
-    val name = MutableLiveData<String>()
-//    val phone = MutableLiveData<String>("")
-//    val email = MutableLiveData<String>()
-//    val LinkIn = MutableLiveData<String>("")
-//    val twitter = MutableLiveData<String>("")
-//    val faceBook = MutableLiveData<String>("")
+    val name = MutableLiveData<String>("")
+    val phone = MutableLiveData<String>("")
+    val email = MutableLiveData<String>("")
+    val LinkIn = MutableLiveData<String>("")
+    val twitter = MutableLiveData<String>("")
+    val faceBook = MutableLiveData<String>("")
 
 
 
 
-    private fun setUserInfo(userInfo: UserInformation) {
+    private fun getUserInfo(userInfo: UserInformation) {
         viewModelScope.launch {
             Log.e("TAG", "setUserInfo: i am in ViweModel", )
             setUserInfoUseCase.invoke(userInfo)
         }
     }
-
-    fun getUserInfo(name:String,number:String,email:String,linkIn:String,twitter:String,faceBook:String){
+    fun setNewUserInfo(name:String, number:String, email:String, linkIn:String, twitter:String, faceBook:String){
         val userProfile = UserInformation(name, number, email, linkIn, twitter, faceBook)
-        setUserInfo(userProfile)
+        getUserInfo(userProfile)
     }
         fun getUserInfo(){
             viewModelScope.launch {
                 getUserInfoUseCase.invoke()
                     .collect { userInfor->
-                    _user.update { userInfor
-//                        .copy(name = name.value.toString(), number = phone.value.toString(), email = email.value.toString()
-//                    , linkIn = LinkIn.value.toString(), twitter = twitter.value.toString(), faceBook = faceBook.value.toString())
+                    _user.update {
+                        userInfor
                     }
                     Log.d("TAG", "kkkkkkkkkk: ${userInfor}")
-
                 }
             }
         }
 
-
     }
-//    private fun updateUserInfo(userName:String,userPhone:String,userEmail:String,userLinkIn:String,userTwitter:String,userFaceBook:String){}
-

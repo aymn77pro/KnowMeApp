@@ -25,9 +25,10 @@
             android:id="@+id/personNameText"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginStart="32dp"
+            app:errorEnabled="true"
             android:hint="person name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/personImage">
@@ -40,7 +41,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/personeNumberText"
             android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:layout_constraintStart_toEndOf="@id/personNameText"
             app:layout_constraintTop_toTopOf="@id/personNameText"
@@ -58,7 +59,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/personEmailText"
             android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:hint="Email"
             app:layout_constraintTop_toBottomOf="@id/personNameText"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -74,7 +75,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/personLinkInText"
             android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="LinkIn account"
             app:layout_constraintStart_toEndOf="@id/personEmailText"
@@ -108,7 +109,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/personeFaceBookText"
             android:layout_width="150dp"
-            android:layout_height="50dp"
+                android:layout_height="wrap_content"
             android:hint="FaceBook Account"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:layout_constraintTop_toTopOf="@id/personTwitterText"
@@ -126,7 +127,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/personInfoText"
             android:layout_width="320dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:layout_constraintTop_toBottomOf="@id/personTwitterText"
@@ -138,11 +139,12 @@
                 android:id="@+id/personInfo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:ignore="TouchTargetSizeCheck" />
+                android:inputType=""
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="36dp"

@@ -57,7 +57,7 @@
                 android:hint="Phone Number">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/Number"
+                    android:id="@+id/number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="phone" />
@@ -137,7 +137,7 @@
 
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/save"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
