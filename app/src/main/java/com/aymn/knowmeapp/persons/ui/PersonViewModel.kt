@@ -1,18 +1,21 @@
 package com.aymn.knowmeapp.persons.ui
 
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.aymn.knowmeapp.network.model.PersonInformation
-import com.aymn.knowmeapp.network.model.personDataItem
-import com.aymn.knowmeapp.persons.domain.GetOnePersonUseCase
-import com.aymn.knowmeapp.persons.domain.GetPersonDataUseCase
-import com.aymn.knowmeapp.persons.domain.SetOnePersoneData
-import com.aymn.knowmeapp.persons.domain.SetPersonDataUseCase
-import kotlinx.coroutines.flow.*
+import com.aymn.knowmeapp.persons.domain.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class PersonViewModel(private val setPersonDataUseCase: SetPersonDataUseCase,private val getPersonDataUseCase: GetPersonDataUseCase
-,private val getOnePersonUseCase: GetOnePersonUseCase,private val setOnePersoneData: SetOnePersoneData
-):ViewModel() {
+class PersonViewModel(
+    private val setPersonDataUseCase: SetPersonDataUseCase,
+    private val getPersonDataUseCase: GetPersonDataUseCase,
+    private val getOnePersonUseCase: GetOnePersonUseCase,
+    private val setOnePersoneData: SetOnePersoneData,
+    private val deletePersonInformationUseCase: DeletePersonInformationUseCase
+) : ViewModel() {
 
     private val _persons = MutableStateFlow<List<PersonInformation>>(emptyList())
     val persons = _persons.asLiveData()
@@ -42,9 +45,15 @@ class PersonViewModel(private val setPersonDataUseCase: SetPersonDataUseCase,pri
         }
     }
 
-    fun setOnePerson(id:String,personInformation: PersonInformation){
+    fun setOnePerson(id: String, personInformation: PersonInformation) {
         viewModelScope.launch {
-             setOnePersoneData.invoke(id,personInformation)
+            setOnePersoneData.invoke(id, personInformation)
+        }
+    }
+
+    fun deletePerson(id: String){
+        viewModelScope.launch {
+            deletePersonInformationUseCase.invoke(id)
         }
     }
 

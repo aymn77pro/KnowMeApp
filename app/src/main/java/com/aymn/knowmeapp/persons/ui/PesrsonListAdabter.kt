@@ -13,13 +13,14 @@ import com.aymn.knowmeapp.network.model.PersonInformation
 import com.example.knowmeapp.R
 import com.example.knowmeapp.databinding.PersonItem1Binding
 
-class PesrsonListAdabter(private val context: Context):
-ListAdapter<PersonInformation,PesrsonListAdabter.PersonViewHolder>(DiffCallBack){
+class PesrsonListAdabter(private val context: Context) :
+    ListAdapter<PersonInformation, PesrsonListAdabter.PersonViewHolder>(DiffCallBack) {
 
 
-    class PersonViewHolder(private val binding:PersonItem1Binding):RecyclerView.ViewHolder(binding.root){
-        val card:CardView = itemView.findViewById(R.id.cerdView)
-        fun bind(personInformation: PersonInformation){
+    class PersonViewHolder(private val binding: PersonItem1Binding) :
+        RecyclerView.ViewHolder(binding.root) {
+        val card: CardView = itemView.findViewById(R.id.cerdView)
+        fun bind(personInformation: PersonInformation) {
             binding.name.text = personInformation.Name
 
         }
@@ -31,7 +32,7 @@ ListAdapter<PersonInformation,PesrsonListAdabter.PersonViewHolder>(DiffCallBack)
         viewType: Int
     ): PersonViewHolder {
         return PersonViewHolder(
-           PersonItem1Binding.inflate(LayoutInflater.from(parent.context))
+            PersonItem1Binding.inflate(LayoutInflater.from(parent.context))
         )
 
     }
@@ -40,7 +41,10 @@ ListAdapter<PersonInformation,PesrsonListAdabter.PersonViewHolder>(DiffCallBack)
         val current = getItem(position)
         holder.bind(current)
         holder.card.setOnClickListener {
-            val action = ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToParsoneInfoFragment(current.id)
+            val action =
+                ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToParsoneInfoFragment(
+                    current.id
+                )
             Log.d("TAG", "current id = ${current.id} ")
             holder.itemView.findNavController().navigate(action)
         }
@@ -48,10 +52,17 @@ ListAdapter<PersonInformation,PesrsonListAdabter.PersonViewHolder>(DiffCallBack)
 
     companion object {
         private val DiffCallBack = object : DiffUtil.ItemCallback<PersonInformation>() {
-            override fun areItemsTheSame(oldItem: PersonInformation, newItem: PersonInformation): Boolean {
+            override fun areItemsTheSame(
+                oldItem: PersonInformation,
+                newItem: PersonInformation
+            ): Boolean {
                 return oldItem.Name == newItem.Name
             }
-            override fun areContentsTheSame(oldItem: PersonInformation, newItem: PersonInformation): Boolean {
+
+            override fun areContentsTheSame(
+                oldItem: PersonInformation,
+                newItem: PersonInformation
+            ): Boolean {
                 return oldItem.Name == newItem.Name
             }
         }

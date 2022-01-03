@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.aymn.knowmeapp.ViewModelFactory
-import com.aymn.knowmeapp.persons.ui.ListOfPersonsFragmentDirections
 import com.example.knowmeapp.R
 import com.example.knowmeapp.databinding.FragmentUserInfoBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -18,25 +17,22 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
 class UserInfoFragment : Fragment() {
-    private val viewModel:UserInfoViewModel by activityViewModels {
+    private val viewModel: UserInfoViewModel by activityViewModels {
         ViewModelFactory()
     }
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
-    private var _binding: FragmentUserInfoBinding?= null
+    private var _binding: FragmentUserInfoBinding? = null
     private val binding get() = _binding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
 
 
     override fun onCreateView(
@@ -44,18 +40,21 @@ class UserInfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentUserInfoBinding.inflate(inflater,container,false)
+        _binding = FragmentUserInfoBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
         return binding?.root
     }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.sing_out, menu)
     }
+
     override fun onOptionsItemSelected(item: MenuItem) =
-        when(item.itemId){
+        when (item.itemId) {
             R.id.singOutIcon -> {
                 singOut()
-                val actionUserProfile = UserInfoFragmentDirections.actionUserInfoFragmentToSingInFragment()
+                val actionUserProfile =
+                    UserInfoFragmentDirections.actionUserInfoFragmentToSingInFragment()
                 findNavController().navigate(actionUserProfile)
                 true
             }
@@ -72,11 +71,11 @@ class UserInfoFragment : Fragment() {
 
         googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
-        Log.e("TAG", "onViewCreated: ${viewModel.user.value?.name}",)
+        Log.e("TAG", "onViewCreated: ${viewModel.user.value?.name}")
 
         binding?.back?.setOnClickListener {
-        val action = UserInfoFragmentDirections.actionUserInfoFragmentToListOfContactFragment()
-        findNavController().navigate(action)
+            val action = UserInfoFragmentDirections.actionUserInfoFragmentToListOfContactFragment()
+            findNavController().navigate(action)
         }
         binding?.editUserInfo?.setOnClickListener {
             val action = UserInfoFragmentDirections.actionUserInfoFragmentToUserEditInnfoFragment()
@@ -100,10 +99,11 @@ class UserInfoFragment : Fragment() {
         }
     }
 
-    private fun singOut(){
+    private fun singOut() {
         Firebase.auth.signOut()
         googleSignInClient.signOut()
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

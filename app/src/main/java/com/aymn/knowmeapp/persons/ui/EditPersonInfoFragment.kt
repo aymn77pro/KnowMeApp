@@ -20,7 +20,7 @@ class EditPersonInfoFragment : Fragment() {
         ViewModelFactory()
     }
 
-    private val navigationArgs : EditPersonInfoFragmentArgs by navArgs()
+    private val navigationArgs: EditPersonInfoFragmentArgs by navArgs()
 
     private var _binding: FragmentEditPersonInfoBinding? = null
     val binding get() = _binding
@@ -44,8 +44,8 @@ class EditPersonInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id = navigationArgs.id
-        if (id != "empty"){
-            val x= viewModel.personData.value
+        if (id != "empty") {
+            val x = viewModel.personData.value
             binding?.personeName?.setText(x?.Name)
             binding?.personeNumber?.setText(x?.Number)
             binding?.personEmail?.setText(x?.Email)
@@ -59,30 +59,32 @@ class EditPersonInfoFragment : Fragment() {
                 binding?.personNameText?.isErrorEnabled = true
                 Toast.makeText(context, "name is empty", Toast.LENGTH_LONG).show()
             } else {
-                if (id != "empty"){
-                    viewModel.setOnePerson(id,PersonInformation(
-                        binding?.personeName?.text.toString(),
-                        binding?.personeNumber?.text.toString(),
-                        binding?.personEmail?.text.toString(),
-                        binding?.personLinkIn?.text.toString(),
-                        binding?.personTwitter?.text.toString(),
-                        binding?.personeFaceBook?.text.toString(),
-                        binding?.personInfo?.text.toString()
-                    )
+                if (id != "empty") {
+                    viewModel.setOnePerson(
+                        id, PersonInformation(
+                            binding?.personeName?.text.toString(),
+                            binding?.personeNumber?.text.toString(),
+                            binding?.personEmail?.text.toString(),
+                            binding?.personLinkIn?.text.toString(),
+                            binding?.personTwitter?.text.toString(),
+                            binding?.personeFaceBook?.text.toString(),
+                            binding?.personInfo?.text.toString()
+                        )
                     )
                     viewModel.getOnePerson(id)
                 } else {
-                viewModel.setPersonData(
-                    PersonInformation(
-                        binding?.personeName?.text.toString(),
-                        binding?.personeNumber?.text.toString(),
-                        binding?.personEmail?.text.toString(),
-                        binding?.personLinkIn?.text.toString(),
-                        binding?.personTwitter?.text.toString(),
-                        binding?.personeFaceBook?.text.toString(),
-                        binding?.personInfo?.text.toString()
+                    viewModel.setPersonData(
+                        PersonInformation(
+                            binding?.personeName?.text.toString(),
+                            binding?.personeNumber?.text.toString(),
+                            binding?.personEmail?.text.toString(),
+                            binding?.personLinkIn?.text.toString(),
+                            binding?.personTwitter?.text.toString(),
+                            binding?.personeFaceBook?.text.toString(),
+                            binding?.personInfo?.text.toString()
+                        )
                     )
-                )}
+                }
                 val action =
                     EditPersonInfoFragmentDirections.actionEditParsoneInfoFragmentToListOfPersonsFragment()
                 findNavController().navigate(action)

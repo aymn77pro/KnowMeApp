@@ -15,10 +15,10 @@ import kotlinx.coroutines.launch
 
 class ListOfPersonsFragment : Fragment() {
 
-    private val viewModel:PersonViewModel by activityViewModels {
+    private val viewModel: PersonViewModel by activityViewModels {
         ViewModelFactory()
     }
-    private var _binding: FragmentListOfPersonsBinding?= null
+    private var _binding: FragmentListOfPersonsBinding? = null
     private val binding get() = _binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +31,7 @@ class ListOfPersonsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentListOfPersonsBinding.inflate(inflater,container,false)
+        _binding = FragmentListOfPersonsBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
         return binding?.root
     }
@@ -41,31 +41,34 @@ class ListOfPersonsFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem) =
-        when(item.itemId){
-        R.id.userProfile -> {
-            val actionUserProfile = ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToUserInfoFragment()
-            findNavController().navigate(actionUserProfile)
-        true
+        when (item.itemId) {
+            R.id.userProfile -> {
+                val actionUserProfile =
+                    ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToUserInfoFragment()
+                findNavController().navigate(actionUserProfile)
+                true
+            }
+            else -> false
         }
-        else -> false
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.addParsone?.setOnClickListener {
-            val action = ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToEditParsoneInfoFragment()
+            val action =
+                ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToEditParsoneInfoFragment()
             findNavController().navigate(action)
         }
         val adabter = PesrsonListAdabter(this.requireContext())
         binding?.recyclerView?.adapter = adabter
 
-        viewModel.persons.observe(viewLifecycleOwner,{
+        viewModel.persons.observe(viewLifecycleOwner, {
             it.let {
-                adabter.submitList(it) }
+                adabter.submitList(it)
+            }
         })
 
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.getPersonData()
             }

@@ -158,31 +158,43 @@
             app:layout_constraintStart_toStartOf="@id/faceBook"
             app:layout_constraintTop_toBottomOf="@id/faceBook"
             />
+
         <TextView
             android:id="@+id/personInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="wolcome to my app KnowMe"
-            android:textStyle="bold"
             android:textSize="16dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/personInfoText"
-            app:layout_constraintTop_toBottomOf="@id/personInfoText"
-            />
+            app:layout_constraintTop_toBottomOf="@id/personInfoText" />
 
         <Button
             android:id="@+id/editPersonInfo"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
             android:text="Edit"
-            android:textStyle="bold"
             android:textSize="16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@id/personInfo"
-            />
+            app:layout_constraintHorizontal_bias="0.82"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/personInfo" />
 
-
+        <Button
+            android:id="@+id/delete"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="72dp"
+            android:text="Delete"
+            android:textColor="#930404"
+            app:layout_constraintEnd_toStartOf="@+id/editPersonInfo"
+            app:layout_constraintTop_toBottomOf="@+id/personInfo"
+            app:strokeColor="#FFFFFF" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

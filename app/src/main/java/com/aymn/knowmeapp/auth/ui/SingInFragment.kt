@@ -18,15 +18,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 private const val RC_SIGN_IN = 9001
 
 class SingInFragment : Fragment() {
-    private var _binding : FragmentSingInBinding ?= null
+    private var _binding: FragmentSingInBinding? = null
     private val binding get() = _binding
 
     private lateinit var auth: FirebaseAuth
@@ -38,9 +35,10 @@ class SingInFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSingInBinding.inflate(inflater,container,false)
+        _binding = FragmentSingInBinding.inflate(inflater, container, false)
         return binding?.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -54,7 +52,7 @@ class SingInFragment : Fragment() {
         binding?.signInButton?.setOnClickListener {
             signIn()
         }
-        if (auth.currentUser != null ){
+        if (auth.currentUser != null) {
             val action = SingInFragmentDirections.actionSingInFragmentToListOfContactFragment()
             findNavController().navigate(action)
         }

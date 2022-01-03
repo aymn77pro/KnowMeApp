@@ -83,7 +83,7 @@ class PersoneDataSource(
             .collection("${auth.currentUser?.email}+persons")
             .document(id)
 
-        document.delete().addOnSuccessListener {
+        document.delete().addOnCompleteListener {
             Log.d("TAG", "DocumentSnapshot successfully deleted!")
         }.addOnFailureListener {
             Log.d("TAG", "DocumentSnapshot dont deleted! ")

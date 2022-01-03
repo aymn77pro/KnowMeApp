@@ -12,5 +12,5 @@ class PersonRepository(private val personeDataSource: PersoneDataSource) {
 
     suspend fun setOnePersoneData(id: String,personInformation: PersonInformation) = personeDataSource.setOnePersonData(id,personInformation)
 
-
+    suspend fun deletePersoneData(id:String) = personeDataSource.deletePersonData(id)
 }
