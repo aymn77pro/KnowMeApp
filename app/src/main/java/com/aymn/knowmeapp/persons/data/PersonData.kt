@@ -12,4 +12,6 @@ interface PersonData {
     suspend fun getOnePersonData(id:String):Flow<PersonInformation>
 
     suspend fun setOnePersonData(id:String,personInformation: PersonInformation)
+
+    suspend fun deletePersonData(id: String)
 }

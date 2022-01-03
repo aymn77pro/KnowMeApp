@@ -4,7 +4,6 @@ import android.util.Log
 import com.aymn.knowmeapp.network.model.PersonInformation
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -21,9 +20,7 @@ class PersoneDataSource(
         val document = db.collection("users").document("${auth.currentUser?.email}")
             .collection("${auth.currentUser?.email}+persons").document()
 
-
         personInformation.id = document.id
-
 
         Log.d("TAG", "id: ${personInformation.id}")
         document.set(personInformation)
@@ -56,14 +53,14 @@ class PersoneDataSource(
 
     override suspend fun getOnePersonData(id: String): Flow<PersonInformation> = callbackFlow {
         Log.d("TAG", "getOnePersonData: $id")
-       val personDATA= db.collection("users").document(auth.currentUser?.email.toString())
+        val personDATA = db.collection("users").document(auth.currentUser?.email.toString())
             .collection("${auth.currentUser?.email}+persons")
             .document(id)
 
-          personDATA.get()
+        personDATA.get()
             .addOnSuccessListener { document ->
                 val item = document.toObject(PersonInformation::class.java)
-                if (document != null && document.exists()){
+                if (document != null && document.exists()) {
                     trySend(item!!)
                     Log.d("TAG", "DocumentSnapshot data: ${document.data}")
                 } else {
@@ -74,11 +71,23 @@ class PersoneDataSource(
     }
 
     override suspend fun setOnePersonData(id: String, personInformation: PersonInformation) {
-        val document= db.collection("users").document(auth.currentUser?.email.toString())
+        val document = db.collection("users").document(auth.currentUser?.email.toString())
             .collection("${auth.currentUser?.email}+persons")
             .document(id)
-        personInformation.id=id
+        personInformation.id = id
         document.set(personInformation)
+    }
+
+    override suspend fun deletePersonData(id: String) {
+        val document = db.collection("users").document(auth.currentUser?.email.toString())
+            .collection("${auth.currentUser?.email}+persons")
+            .document(id)
+
+        document.delete().addOnSuccessListener {
+            Log.d("TAG", "DocumentSnapshot successfully deleted!")
+        }.addOnFailureListener {
+            Log.d("TAG", "DocumentSnapshot dont deleted! ")
+        }
     }
 //---------------------------------finish setPersonInformation--------------------------------------//
 }
