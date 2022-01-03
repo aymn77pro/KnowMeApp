@@ -9,5 +9,7 @@ interface PersonData {
 
     suspend fun getPersonsData(): Flow<List<PersonInformation>>
 
-   // suspend fun addPersonData(name:String):Flow<PersonInformation>
+    suspend fun getOnePersonData(id:String):Flow<PersonInformation>
+
+    suspend fun setOnePersonData(id:String,personInformation: PersonInformation)
 }

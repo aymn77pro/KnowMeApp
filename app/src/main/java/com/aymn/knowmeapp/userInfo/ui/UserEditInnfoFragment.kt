@@ -32,13 +32,12 @@ class UserEditInnfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.name.value = binding?.Name?.text.toString()
-        binding?.Name?.setText(viewModel.user.value.name)
-        binding?.number?.setText(viewModel.user.value.number)
-        binding?.Email?.setText(viewModel.user.value.email)
-        binding?.LinkIn?.setText(viewModel.user.value.linkIn)
-            binding?.Twitter?.setText(viewModel.user.value.twitter)
-        binding?.FaceBook?.setText(viewModel.user.value.faceBook)
+        binding?.Name?.setText(viewModel.user.value?.name)
+        binding?.number?.setText(viewModel.user.value?.number)
+        binding?.Email?.setText(viewModel.user.value?.email)
+        binding?.LinkIn?.setText(viewModel.user.value?.linkIn)
+            binding?.Twitter?.setText(viewModel.user.value?.twitter)
+        binding?.FaceBook?.setText(viewModel.user.value?.faceBook)
 
 
         binding?.save?.setOnClickListener {

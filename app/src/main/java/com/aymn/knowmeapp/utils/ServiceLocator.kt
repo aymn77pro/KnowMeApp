@@ -2,8 +2,9 @@ package com.aymn.knowmeapp.utils
 
 import com.aymn.knowmeapp.persons.data.PersonRepository
 import com.aymn.knowmeapp.persons.data.PersoneDataSource
-import com.aymn.knowmeapp.persons.domain.AddPersonUseCase
+import com.aymn.knowmeapp.persons.domain.GetOnePersonUseCase
 import com.aymn.knowmeapp.persons.domain.GetPersonDataUseCase
+import com.aymn.knowmeapp.persons.domain.SetOnePersoneData
 import com.aymn.knowmeapp.persons.domain.SetPersonDataUseCase
 import com.aymn.knowmeapp.userInfo.data.UserInfoDataSource
 import com.aymn.knowmeapp.userInfo.data.UserInfoRepository
@@ -20,7 +21,7 @@ fun providerSetUserInfoUseCase():SetUserInfoUseCase = SetUserInfoUseCase(provide
 fun providerGetUserInfoUseCase():GetUserInfoUseCase = GetUserInfoUseCase(providerUserInfoRepository())
 
 //--------------------finish user profile-------------------------------------------------------------//
-
+//--------------------start person data--------------------------------------------------------------//
 fun providerPersonDataSource():PersoneDataSource = PersoneDataSource(FirebaseFirestore.getInstance())
 
 fun providerPersonRepository():PersonRepository = PersonRepository(providerPersonDataSource())
@@ -29,4 +30,6 @@ fun providerSetPersonDataUseCase():SetPersonDataUseCase = SetPersonDataUseCase(p
 
 fun providerGetPersonDataUseCase():GetPersonDataUseCase = GetPersonDataUseCase(providerPersonRepository())
 
-fun providerAddPersonDataUseCase():AddPersonUseCase = AddPersonUseCase(providerPersonRepository())
+fun providerGetOnePersonDataUseCase():GetOnePersonUseCase = GetOnePersonUseCase(providerPersonRepository())
+
+fun providerSetOnePersonDataUseCase():SetOnePersoneData = SetOnePersoneData(providerPersonRepository())

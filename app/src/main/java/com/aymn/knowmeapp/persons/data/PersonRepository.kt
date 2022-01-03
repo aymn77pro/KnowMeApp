@@ -8,5 +8,8 @@ class PersonRepository(private val personeDataSource: PersoneDataSource) {
 
     suspend fun getPersonData() = personeDataSource.getPersonsData()
 
-  //  suspend fun addPersonData(name:String) = personeDataSource.addPersonData(name)
+    suspend fun getOnePersonData(id:String) = personeDataSource.getOnePersonData(id)
+
+    suspend fun setOnePersoneData(id: String,personInformation: PersonInformation) = personeDataSource.setOnePersonData(id,personInformation)
+
 }

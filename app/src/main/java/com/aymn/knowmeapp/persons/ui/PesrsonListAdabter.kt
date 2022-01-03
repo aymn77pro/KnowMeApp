@@ -1,6 +1,7 @@
 package com.aymn.knowmeapp.persons.ui
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
@@ -37,13 +38,10 @@ ListAdapter<PersonInformation,PesrsonListAdabter.PersonViewHolder>(DiffCallBack)
 
     override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
         val current = getItem(position)
-        holder.card.setOnClickListener {
-            val action = ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToParsoneInfoFragment(current.Name)
-            it.findNavController().navigate(action)
-        }
         holder.bind(current)
         holder.card.setOnClickListener {
-            val action = ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToParsoneInfoFragment(current.Name)
+            val action = ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToParsoneInfoFragment(current.id)
+            Log.d("TAG", "current id = ${current.id} ")
             holder.itemView.findNavController().navigate(action)
         }
     }
@@ -53,12 +51,10 @@ ListAdapter<PersonInformation,PesrsonListAdabter.PersonViewHolder>(DiffCallBack)
             override fun areItemsTheSame(oldItem: PersonInformation, newItem: PersonInformation): Boolean {
                 return oldItem.Name == newItem.Name
             }
-
             override fun areContentsTheSame(oldItem: PersonInformation, newItem: PersonInformation): Boolean {
                 return oldItem.Name == newItem.Name
             }
         }
     }
-
 }
 

@@ -68,16 +68,20 @@
             android:id="@+id/action_parsoneInfoFragment_to_editParsoneInfoFragment"
             app:destination="@id/editParsoneInfoFragment" />
         <argument
-            android:name="name"
+            android:name="id"
             app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/editParsoneInfoFragment"
         android:name="com.aymn.knowmeapp.persons.ui.EditPersonInfoFragment"
         android:label="fragment_edit_parsone_info"
-        tools:layout="@layout/fragment_edit_person_info" >
+        tools:layout="@layout/fragment_edit_person_info">
         <action
             android:id="@+id/action_editParsoneInfoFragment_to_listOfPersonsFragment"
             app:destination="@id/listOfPersonsFragment" />
+        <argument
+            android:name="id"
+            android:defaultValue="empty"
+            app:argType="string" />
     </fragment>
 </navigation>

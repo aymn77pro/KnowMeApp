@@ -11,3 +11,4 @@ data class PersonInformation(
     var id : String = ""
 )
 
+var personDataItem:MutableList<PersonInformation> = mutableListOf()

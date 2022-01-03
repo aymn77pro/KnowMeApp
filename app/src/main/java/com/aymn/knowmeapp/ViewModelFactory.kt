@@ -16,7 +16,7 @@ class ViewModelFactory: ViewModelProvider.Factory {
         } else if (modelClass.isAssignableFrom(PersonViewModel::class.java)){
             @Suppress("UNCHEKED_CAST")
             return PersonViewModel(providerSetPersonDataUseCase(),providerGetPersonDataUseCase(),
-                providerAddPersonDataUseCase() ) as T
+                providerGetOnePersonDataUseCase(), providerSetOnePersonDataUseCase() ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
