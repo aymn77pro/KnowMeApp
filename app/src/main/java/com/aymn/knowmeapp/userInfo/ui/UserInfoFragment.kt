@@ -1,8 +1,10 @@
 package com.aymn.knowmeapp.userInfo.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -10,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.aymn.knowmeapp.ViewModelFactory
+import com.bumptech.glide.Glide
 import com.example.knowmeapp.R
 import com.example.knowmeapp.databinding.FragmentUserInfoBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -17,6 +20,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
@@ -30,10 +34,6 @@ class UserInfoFragment : Fragment() {
 
     private var _binding: FragmentUserInfoBinding? = null
     private val binding get() = _binding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,7 +60,6 @@ class UserInfoFragment : Fragment() {
             }
             else -> false
         }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         auth = Firebase.auth
@@ -72,7 +71,13 @@ class UserInfoFragment : Fragment() {
         googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
         Log.e("TAG", "onViewCreated: ${viewModel.user.value?.name}")
-
+        if(viewModel.user.value?.profile.isNullOrEmpty()){
+                binding?.userPic?.setImageResource(R.drawable.ic_baseline_account_circle_24)
+        }else{
+            binding?.userPic?.setImageURI(viewModel.user.value!!.profile?.toUri())
+            Glide.with(requireContext()).load(viewModel.user.value!!.profile?.toUri())
+                .into(binding?.userPic!!)
+        }
         binding?.back?.setOnClickListener {
             val action = UserInfoFragmentDirections.actionUserInfoFragmentToListOfContactFragment()
             findNavController().navigate(action)
@@ -91,6 +96,15 @@ class UserInfoFragment : Fragment() {
                     binding?.LinkIn?.setText(viewModel.user.value?.linkIn)
                     binding?.twitter?.setText(viewModel.user.value?.twitter)
                     binding?.faceBook?.setText(viewModel.user.value?.faceBook)
+                    Log.e("TAG","image:${viewModel.user.value?.profile}")
+                    if(viewModel.user.value?.profile.isNullOrBlank()){
+                        binding?.userPic?.setImageResource(R.drawable.ic_baseline_account_circle_24)
+                    }else{
+                        Glide.with(requireContext()).load(viewModel.user.value!!.profile?.toUri())
+                            .into(binding?.userPic!!)
+                    }
+                    Glide.with(requireContext()).load(viewModel.user.value?.profile?.toUri())
+                        .into(binding?.userPic!!)
                 })
 
             }
@@ -101,9 +115,15 @@ class UserInfoFragment : Fragment() {
 
     private fun singOut() {
         Firebase.auth.signOut()
+        viewModel.user.value?.name=null
+        viewModel.user.value?.email = null
+        viewModel.user.value?.number = null
+        viewModel.user.value?.linkIn = null
+        viewModel.user.value?.twitter = null
+        viewModel.user.value?.faceBook = null
+        viewModel.user.value?.profile = null
         googleSignInClient.signOut()
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

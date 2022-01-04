@@ -56,8 +56,6 @@ class PersonViewModel(
             deletePersonInformationUseCase.invoke(id)
         }
     }
-
-
 }
 
 
