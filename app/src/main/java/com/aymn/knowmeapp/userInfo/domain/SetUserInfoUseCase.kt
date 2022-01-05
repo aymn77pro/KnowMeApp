@@ -6,6 +6,7 @@ import com.aymn.knowmeapp.userInfo.data.UserInfoRepository
 
 class SetUserInfoUseCase(private val userInfoRepository: UserInfoRepository) {
 
-    suspend operator fun invoke(userInfo: UserInformation,uri: Uri) = userInfoRepository.setUserInfo(userInfo,uri)
+    suspend operator fun invoke(userInfo: UserInformation) = userInfoRepository.setUserInfo(userInfo)
+
 
 }

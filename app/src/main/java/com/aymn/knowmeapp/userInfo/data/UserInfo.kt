@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserInfo {
 
-    suspend fun setUserInfo(userInfo: UserInformation,uri: Uri)
+    suspend fun setUserInfo(userInfo: UserInformation)
 
     suspend fun getUserInfo(): Flow<UserInformation>
 }

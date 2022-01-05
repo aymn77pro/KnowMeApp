@@ -5,7 +5,7 @@ import com.aymn.knowmeapp.network.model.UserInformation
 
 class UserInfoRepository(private val userInfoDataSource: UserInfoDataSource) {
 
-    suspend fun setUserInfo(userInfo: UserInformation,uri: Uri) = userInfoDataSource.setUserInfo(userInfo,uri)
+    suspend fun setUserInfo(userInfo: UserInformation) = userInfoDataSource.setUserInfo(userInfo)
 
     suspend fun getUserInfo() = userInfoDataSource.getUserInfo()
 

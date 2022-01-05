@@ -10,6 +10,5 @@ data class UserInformation(
     var linkIn: String? = "",
     var twitter: String? = "",
     var faceBook: String? = "",
-    var profile:String ?="",
-    var file:String=""
+    var profile:Uri ?="".toUri()
 )

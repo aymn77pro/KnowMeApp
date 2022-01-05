@@ -71,11 +71,10 @@ class UserInfoFragment : Fragment() {
         googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
         Log.e("TAG", "onViewCreated: ${viewModel.user.value?.name}")
-        if(viewModel.user.value?.profile.isNullOrEmpty()){
+        if(viewModel.user.value?.profile ==null){
                 binding?.userPic?.setImageResource(R.drawable.ic_baseline_account_circle_24)
         }else{
-            binding?.userPic?.setImageURI(viewModel.user.value!!.profile?.toUri())
-            Glide.with(requireContext()).load(viewModel.user.value!!.profile?.toUri())
+            Glide.with(requireContext()).load(viewModel.user.value!!.profile)
                 .into(binding?.userPic!!)
         }
         binding?.back?.setOnClickListener {
@@ -97,14 +96,11 @@ class UserInfoFragment : Fragment() {
                     binding?.twitter?.setText(viewModel.user.value?.twitter)
                     binding?.faceBook?.setText(viewModel.user.value?.faceBook)
                     Log.e("TAG","image:${viewModel.user.value?.profile}")
-                    if(viewModel.user.value?.profile.isNullOrBlank()){
                         binding?.userPic?.setImageResource(R.drawable.ic_baseline_account_circle_24)
-                    }else{
-                        Glide.with(requireContext()).load(viewModel.user.value!!.profile?.toUri())
+                        Glide.with(requireContext()).load(viewModel.user.value!!.profile)
+                            .placeholder(R.drawable.loading_animation)
+                            .error(R.drawable.ic_baseline_account_circle_24)
                             .into(binding?.userPic!!)
-                    }
-                    Glide.with(requireContext()).load(viewModel.user.value?.profile?.toUri())
-                        .into(binding?.userPic!!)
                 })
 
             }
@@ -122,6 +118,7 @@ class UserInfoFragment : Fragment() {
         viewModel.user.value?.twitter = null
         viewModel.user.value?.faceBook = null
         viewModel.user.value?.profile = null
+
         googleSignInClient.signOut()
     }
     override fun onDestroyView() {
