@@ -56,7 +56,7 @@ class ListOfPersonsFragment : Fragment() {
 
         binding?.addParsone?.setOnClickListener {
             val action =
-                ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToEditParsoneInfoFragment()
+                ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToEditParsoneInfoFragment(name = "Add New Person")
             findNavController().navigate(action)
         }
         val adabter = PesrsonListAdabter(this.requireContext())

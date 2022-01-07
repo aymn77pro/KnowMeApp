@@ -1,5 +1,6 @@
 package com.aymn.knowmeapp.persons.ui
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -23,9 +24,9 @@ class PersonViewModel(
     private val _personData = MutableStateFlow(PersonInformation())
     val personData = _personData.asLiveData()
 
-    fun setPersonData(personInformation: PersonInformation) {
+    fun setPersonData(personInformation: PersonInformation,uri: Uri?) {
         viewModelScope.launch {
-            setPersonDataUseCase.invoke(personInformation)
+            setPersonDataUseCase.invoke(personInformation,uri)
         }
     }
 
@@ -45,9 +46,9 @@ class PersonViewModel(
         }
     }
 
-    fun setOnePerson(id: String, personInformation: PersonInformation) {
+    fun setOnePerson(id: String, personInformation: PersonInformation,uri: Uri?) {
         viewModelScope.launch {
-            setOnePersoneData.invoke(id, personInformation)
+            setOnePersoneData.invoke(id, personInformation, uri)
         }
     }
 

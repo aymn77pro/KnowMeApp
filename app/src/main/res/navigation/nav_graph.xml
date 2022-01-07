@@ -53,8 +53,8 @@
     <fragment
         android:id="@+id/userEditInnfoFragment"
         android:name="com.aymn.knowmeapp.userInfo.ui.UserEditInnfoFragment"
-        android:label="fragment_user_edit_innfo"
-        tools:layout="@layout/fragment_user_edit_innfo" >
+        android:label="profile"
+        tools:layout="@layout/fragment_user_edit_innfo">
         <action
             android:id="@+id/action_userEditInnfoFragment_to_userInfoFragment"
             app:destination="@id/userInfoFragment" />
@@ -62,8 +62,8 @@
     <fragment
         android:id="@+id/parsoneInfoFragment"
         android:name="com.aymn.knowmeapp.persons.ui.PersonInfoFragment"
-        android:label="fragment_parsone_info"
-        tools:layout="@layout/fragment_parsone_info" >
+        android:label="{name}"
+        tools:layout="@layout/fragment_parsone_info">
         <action
             android:id="@+id/action_parsoneInfoFragment_to_editParsoneInfoFragment"
             app:destination="@id/editParsoneInfoFragment" />
@@ -73,11 +73,14 @@
         <action
             android:id="@+id/action_parsoneInfoFragment_to_listOfPersonsFragment"
             app:destination="@id/listOfPersonsFragment" />
+        <argument
+            android:name="name"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/editParsoneInfoFragment"
         android:name="com.aymn.knowmeapp.persons.ui.EditPersonInfoFragment"
-        android:label="fragment_edit_parsone_info"
+        android:label="{name}"
         tools:layout="@layout/fragment_edit_person_info">
         <action
             android:id="@+id/action_editParsoneInfoFragment_to_listOfPersonsFragment"
@@ -85,6 +88,9 @@
         <argument
             android:name="id"
             android:defaultValue="empty"
+            app:argType="string" />
+        <argument
+            android:name="name"
             app:argType="string" />
     </fragment>
 </navigation>

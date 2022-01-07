@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.aymn.knowmeapp.ViewModelFactory
+import com.bumptech.glide.Glide
+import com.example.knowmeapp.R
 import com.example.knowmeapp.databinding.FragmentParsoneInfoBinding
 
 
@@ -43,7 +46,7 @@ class PersonInfoFragment : Fragment() {
         )
         binding?.editPersonInfo?.setOnClickListener {
             val editPerson =
-                PersonInfoFragmentDirections.actionParsoneInfoFragmentToEditParsoneInfoFragment(id)
+                PersonInfoFragmentDirections.actionParsoneInfoFragmentToEditParsoneInfoFragment(id,viewModel.personData.value!!.Name)
             findNavController().navigate(editPerson)
         }
         binding?.delete?.setOnClickListener {
@@ -62,6 +65,10 @@ class PersonInfoFragment : Fragment() {
         binding?.teitter?.text = viewModel.personData.value?.twitter
         binding?.faceBook?.text = viewModel.personData.value?.faceBook
         binding?.personInfo?.text = viewModel.personData.value?.personInformation
+        Glide.with(requireContext()).load(viewModel.personData.value?.imageUri?.toUri())
+            .placeholder(R.drawable.loading_animation)
+            .error(R.drawable.ic_baseline_account_circle_24)
+            .into(binding?.personImage!!)
     }
 
     override fun onDestroyView() {

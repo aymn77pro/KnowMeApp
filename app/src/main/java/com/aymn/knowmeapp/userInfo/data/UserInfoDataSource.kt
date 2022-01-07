@@ -21,24 +21,20 @@ class UserInfoDataSource(
     val db = firebaseDB
     val auth = Firebase.auth
     override suspend fun setUserInfo(userInfo: UserInformation) {
-        val user = db.collection("users").document("${auth.currentUser?.email}")
-        Log.d("TAG", "image reserves: ${userInfo.profile}")
-        uploadImage(userInfo.profile!!).collect {
-            userInfo.profile = it
-            user.set(userInfo, SetOptions.merge()).addOnCompleteListener {
+            val user = db.collection("users").document("${auth.currentUser?.email}")
+            user.set(userInfo).addOnCompleteListener {
                 Log.d("TAG", "setUserInfo: ${it.isSuccessful}")
             }.addOnFailureListener {
-                Log.e("TAG", "image dont save: ${userInfo.profile} ", )
-            }
+                Log.e("TAG", "image dont save: ${userInfo} ",)
             }
         }
+
         //---------------------------------------------------------------------------------------------------------------------//
         override suspend fun getUserInfo(): Flow<UserInformation> = callbackFlow {
             db.collection("users").document("${auth.currentUser?.email}").get()
                 .addOnSuccessListener {
                     val userInfo = it.toObject(UserInformation::class.java)
                     if (userInfo != null) {
-                        Log.d("TAG", "pic value: ${userInfo.profile}")
                         trySend(userInfo)
                     } else if (userInfo == null) {
                         Log.e("TAG", "why null:${userInfo}")
@@ -51,23 +47,5 @@ class UserInfoDataSource(
                 }
             awaitClose {}
         }
+}
 
-        suspend fun uploadImage(file: Uri): Flow<Uri> = callbackFlow {
-            val profileImage = UUID.randomUUID().toString()
-            val storag = FirebaseStorage.getInstance().getReference("/Image/$profileImage")
-
-            storag.putFile(file).addOnSuccessListener {
-                Log.e("TAG", "uploadImage: done uploed ", )
-               val dawnloadUri = storag.downloadUrl
-                  dawnloadUri.addOnSuccessListener {
-                   val uri = it
-                    Log.d("TAG", "uploadImage: $it ")
-
-                }.addOnFailureListener {
-                    Log.e("TAG", "image failed to upload: ${it.message} ", )
-                }
-                trySend(dawnloadUri.result)
-            }
-            awaitClose {}
-        }
-    }

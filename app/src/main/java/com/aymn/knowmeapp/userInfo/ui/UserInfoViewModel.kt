@@ -33,10 +33,10 @@ class UserInfoViewModel(
         email: String,
         linkIn: String,
         twitter: String,
-        faceBook: String,
-        profile:String
-    ) {
-        val userProfile = UserInformation(name, number, email, linkIn, twitter, faceBook,profile.toUri())
+        faceBook: String
+    )
+    {
+        val userProfile = UserInformation(name, number, email, linkIn, twitter, faceBook)
         setUserInfo(userProfile)
     }
 
@@ -45,7 +45,6 @@ class UserInfoViewModel(
             getUserInfoUseCase.invoke()
                 .collect { userInfor ->
                     _user.update {
-                        Log.d("TAG", "image value: ${userInfor.profile}")
                         userInfor
                     }
                     Log.d("TAG", "kkkkkkkkkk: ${userInfor}")

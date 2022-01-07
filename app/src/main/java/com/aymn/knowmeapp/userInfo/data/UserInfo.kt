@@ -1,6 +1,5 @@
 package com.aymn.knowmeapp.userInfo.data
 
-import android.net.Uri
 import com.aymn.knowmeapp.network.model.UserInformation
 import kotlinx.coroutines.flow.Flow
 

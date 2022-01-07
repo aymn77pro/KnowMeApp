@@ -70,13 +70,6 @@ class UserInfoFragment : Fragment() {
 
         googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
-        Log.e("TAG", "onViewCreated: ${viewModel.user.value?.name}")
-        if(viewModel.user.value?.profile ==null){
-                binding?.userPic?.setImageResource(R.drawable.ic_baseline_account_circle_24)
-        }else{
-            Glide.with(requireContext()).load(viewModel.user.value!!.profile)
-                .into(binding?.userPic!!)
-        }
         binding?.back?.setOnClickListener {
             val action = UserInfoFragmentDirections.actionUserInfoFragmentToListOfContactFragment()
             findNavController().navigate(action)
@@ -95,9 +88,8 @@ class UserInfoFragment : Fragment() {
                     binding?.LinkIn?.setText(viewModel.user.value?.linkIn)
                     binding?.twitter?.setText(viewModel.user.value?.twitter)
                     binding?.faceBook?.setText(viewModel.user.value?.faceBook)
-                    Log.e("TAG","image:${viewModel.user.value?.profile}")
-                        binding?.userPic?.setImageResource(R.drawable.ic_baseline_account_circle_24)
-                        Glide.with(requireContext()).load(viewModel.user.value!!.profile)
+
+                        Glide.with(requireContext()).load(auth.currentUser?.photoUrl)
                             .placeholder(R.drawable.loading_animation)
                             .error(R.drawable.ic_baseline_account_circle_24)
                             .into(binding?.userPic!!)
@@ -117,7 +109,6 @@ class UserInfoFragment : Fragment() {
         viewModel.user.value?.linkIn = null
         viewModel.user.value?.twitter = null
         viewModel.user.value?.faceBook = null
-        viewModel.user.value?.profile = null
 
         googleSignInClient.signOut()
     }

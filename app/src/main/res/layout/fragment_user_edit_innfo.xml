@@ -35,7 +35,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="name"
+                android:hint="@string/name"
                 android:padding="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/personImage">
@@ -54,7 +54,7 @@
                 app:layout_constraintStart_toStartOf="@id/personNameText"
                 app:layout_constraintTop_toBottomOf="@id/personNameText"
                 android:padding="16dp"
-                android:hint="Phone Number">
+                android:hint="@string/phone_number">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/number"
@@ -67,7 +67,7 @@
                 android:id="@+id/personEmailText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="@string/email"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:layout_constraintTop_toBottomOf="@id/personeNumberText"
                 app:layout_constraintStart_toStartOf="@id/personNameText"
@@ -86,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="LinkIn account"
+                android:hint="@string/linkin_account"
                 app:layout_constraintStart_toStartOf="@id/personNameText"
                 app:layout_constraintTop_toBottomOf="@id/personEmailText"
                 android:padding="16dp"
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="16dp"
-                android:hint="Twitter Account"
+                android:hint="@string/twitter_account"
                 app:layout_constraintStart_toStartOf="@id/personNameText"
                 app:layout_constraintTop_toBottomOf="@id/personLinkInText"
                 android:padding="16dp"
@@ -120,7 +120,7 @@
                 android:id="@+id/personeFaceBookText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="FaceBook Account"
+                android:hint="@string/facebook_account"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:layout_constraintTop_toBottomOf="@id/personTwitterText"
                 app:layout_constraintStart_toStartOf="@id/personNameText"

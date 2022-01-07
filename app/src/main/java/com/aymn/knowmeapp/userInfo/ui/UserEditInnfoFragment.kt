@@ -17,6 +17,8 @@ import com.aymn.knowmeapp.network.model.UserInformation
 import com.bumptech.glide.Glide
 import com.example.knowmeapp.R
 import com.example.knowmeapp.databinding.FragmentUserEditInnfoBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class UserEditInnfoFragment : Fragment() {
@@ -49,17 +51,15 @@ class UserEditInnfoFragment : Fragment() {
         binding?.LinkIn?.setText(viewModel.user.value?.linkIn)
         binding?.Twitter?.setText(viewModel.user.value?.twitter)
         binding?.FaceBook?.setText(viewModel.user.value?.faceBook)
+
         fileImage ="".toUri()
-        binding?.personImage?.setImageResource(R.drawable.ic_baseline_account_circle_24)
-        Glide.with(requireContext()).load(viewModel.user.value?.profile)
+
+        //binding?.personImage?.setImageResource(R.drawable.ic_baseline_account_circle_24)
+        Glide.with(requireContext()).load(Firebase.auth.currentUser?.photoUrl)
             .placeholder(R.drawable.loading_animation)
             .error(R.drawable.ic_baseline_account_circle_24)
             .into(binding?.personImage!!)
 
-
-        binding?.personImage?.setOnClickListener {
-            openGalleryForImage()
-        }
         binding?.save?.setOnClickListener {
             viewModel.setNewUserInfo(
                 binding?.Name?.text.toString(),
@@ -67,33 +67,24 @@ class UserEditInnfoFragment : Fragment() {
                 binding?.Email?.text.toString(),
                 binding?.LinkIn?.text.toString(),
                 binding?.Twitter?.text.toString(),
-                binding?.FaceBook?.text.toString(),
-                viewModel.user.value?.profile.toString()
+                binding?.FaceBook?.text.toString()
             )
-            Log.d("TAG", "fileImage: $fileImage ")
             val action = UserEditInnfoFragmentDirections.actionUserEditInnfoFragmentToUserInfoFragment()
             findNavController().navigate(action)
-
-        }
-
-    }
-
-
-
-    private fun openGalleryForImage() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, REQUEST_CODE)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
-            binding?.personImage?.setImageURI(data?.data) // handle chosen image
-            viewModel.user.value?.profile = data?.data
-           // viewModel.user.value.profile = data?.dataString
-
-            Log.d("TAG", "fileimag = ${viewModel.user.value?.profile}")
         }
     }
+//    private fun openGalleryForImage() {
+//        val intent = Intent(Intent.ACTION_PICK)
+//        intent.type = "image/*"
+//        startActivityForResult(intent, REQUEST_CODE)
+//    }
+//
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
+//          //  binding?.personImage?.setImageURI(data?.data) // handle chosen image
+//            fileImage = data?.data!!
+//
+//        }
+//    }
 }

@@ -9,6 +9,5 @@ data class UserInformation(
     var email: String? = "",
     var linkIn: String? = "",
     var twitter: String? = "",
-    var faceBook: String? = "",
-    var profile:Uri ?="".toUri()
+    var faceBook: String? = ""
 )
