@@ -10,34 +10,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <ImageView
             android:id="@+id/userPic"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_margin="25dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_account_circle_24" />
+
 
         <TextView
             android:id="@+id/userNameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:padding="8dp"
-            android:text="name: "
-            android:textSize="24dp"
+            android:text="@string/name"
+            android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/userPic"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/userPic" />
 
         <TextView
             android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="aymn al shehri"
-            android:textSize="24dp"
-            android:textStyle="bold"
             android:padding="8dp"
+            android:text="aymn al shehri"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/userNameText"
             app:layout_constraintStart_toEndOf="@id/userNameText"
             app:layout_constraintTop_toTopOf="@id/userNameText" />
@@ -48,8 +54,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="Email: "
-            android:textSize="24dp"
+            android:text="@string/email"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/userNameText"
             app:layout_constraintTop_toBottomOf="@id/userNameText" />
@@ -60,48 +66,49 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:text="emailExp@Gmail.com"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/emailText"
             app:layout_constraintStart_toEndOf="@id/emailText"
             app:layout_constraintTop_toTopOf="@id/emailText" />
 
-        <TextView
+        <Button
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="36dp"
-            android:text="Back"
+            android:layout_marginBottom="100dp"
+            android:text="@string/back"
             android:textColor="#000000"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.853"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/editUserInfo"
+            app:layout_constraintHorizontal_bias="0.486"
+            app:layout_constraintStart_toStartOf="@+id/editUserInfo" />
 
-        <TextView
+        <Button
             android:id="@+id/editUserInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="change user info"
-            android:textSize="24dp"
-            android:textColor="#000000"
+            android:layout_marginTop="16dp"
+            android:text="@string/change_user_info"
+            android:textColor="@color/black"
+            android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/back"
-            app:layout_constraintEnd_toStartOf="@+id/back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/back" />
+            app:layout_constraintTop_toBottomOf="@+id/faceBookText" />
 
         <TextView
             android:id="@+id/phoneNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="Phone Number: "
+            android:text="@string/phone_number"
             android:textAlignment="viewStart"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:textSize="24dp"
             app:layout_constraintStart_toStartOf="@+id/emailText"
             app:layout_constraintTop_toBottomOf="@+id/emailText" />
 
@@ -111,7 +118,7 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:text="05500125"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/phoneNumber"
             app:layout_constraintStart_toEndOf="@+id/phoneNumber"
@@ -121,71 +128,67 @@
             android:id="@+id/linkInText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="24dp"
-            android:text="LinkIn account: "
             android:padding="8dp"
-            app:layout_constraintTop_toBottomOf="@id/phoneNumber"
-            app:layout_constraintStart_toStartOf="@id/phoneNumber"/>
+            android:text="@string/linkin_account"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/phoneNumber"
+            app:layout_constraintTop_toBottomOf="@id/phoneNumber" />
+
         <TextView
             android:id="@+id/LinkIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24dp"
             android:padding="8dp"
+            android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/linkInText"
-            app:layout_constraintTop_toTopOf="@id/linkInText"
             app:layout_constraintBottom_toBottomOf="@id/linkInText"
-            />
+            app:layout_constraintStart_toEndOf="@id/linkInText"
+            app:layout_constraintTop_toTopOf="@id/linkInText" />
 
         <TextView
             android:id="@+id/twitterText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="24dp"
-            android:text="Twitter account: "
             android:padding="8dp"
-            app:layout_constraintTop_toBottomOf="@id/linkInText"
-            app:layout_constraintStart_toStartOf="@id/linkInText"/>
+            android:text="@string/twitter_account"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/linkInText"
+            app:layout_constraintTop_toBottomOf="@id/linkInText" />
+
         <TextView
             android:id="@+id/twitter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24dp"
             android:padding="8dp"
+            android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/twitterText"
-            app:layout_constraintTop_toTopOf="@id/twitterText"
             app:layout_constraintBottom_toBottomOf="@id/twitterText"
-            />
+            app:layout_constraintStart_toEndOf="@id/twitterText"
+            app:layout_constraintTop_toTopOf="@id/twitterText" />
 
         <TextView
             android:id="@+id/faceBookText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="24dp"
-            android:text="FaceBook account: "
             android:padding="8dp"
-            app:layout_constraintTop_toBottomOf="@id/twitterText"
-            app:layout_constraintStart_toStartOf="@id/twitterText"/>
+            android:text="@string/facebook_account"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/twitterText"
+            app:layout_constraintTop_toBottomOf="@id/twitterText" />
+
         <TextView
             android:id="@+id/faceBook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24dp"
             android:padding="8dp"
+            android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/faceBookText"
-            app:layout_constraintTop_toTopOf="@id/faceBookText"
             app:layout_constraintBottom_toBottomOf="@id/faceBookText"
-            />
-
-
-
-
+            app:layout_constraintStart_toEndOf="@id/faceBookText"
+            app:layout_constraintTop_toTopOf="@id/faceBookText" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

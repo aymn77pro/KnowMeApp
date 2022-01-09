@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 private const val RC_SIGN_IN = 9001
@@ -78,6 +80,8 @@ class SingInFragment : Fragment() {
                 val user = auth.currentUser
                 val action = SingInFragmentDirections.actionSingInFragmentToListOfContactFragment()
                 findNavController().navigate(action)
+                Firebase.firestore.collection("users").document("${auth.currentUser?.email}")
+                    .set(mapOf("sing in" to "welcome ${auth.currentUser?.displayName}"), SetOptions.merge())
                 updateUI(user)
             } else {
                 updateUI(null)

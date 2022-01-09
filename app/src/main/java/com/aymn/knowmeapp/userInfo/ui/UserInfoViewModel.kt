@@ -1,6 +1,8 @@
 package com.aymn.knowmeapp.userInfo.ui
 
+import android.net.Uri
 import android.util.Log
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -18,13 +20,13 @@ class UserInfoViewModel(
     private var _user = MutableStateFlow(UserInformation())
     val user = _user.asLiveData()
 
-    private fun getUserInfo(userInfo: UserInformation) {
+   private fun setUserInfo(userInfo: UserInformation) {
         viewModelScope.launch {
-            Log.e("TAG", "setUserInfo: i am in ViweModel")
+            Log.e("TAG", "setUserInfo: i am in set viewModel $userInfo")
             setUserInfoUseCase.invoke(userInfo)
+            Log.d("TAG", "ttttttttttt: ${userInfo}")
         }
     }
-
     fun setNewUserInfo(
         name: String,
         number: String,
@@ -32,9 +34,10 @@ class UserInfoViewModel(
         linkIn: String,
         twitter: String,
         faceBook: String
-    ) {
+    )
+    {
         val userProfile = UserInformation(name, number, email, linkIn, twitter, faceBook)
-        getUserInfo(userProfile)
+        setUserInfo(userProfile)
     }
 
     fun getUserInfo() {
@@ -48,5 +51,4 @@ class UserInfoViewModel(
                 }
         }
     }
-
 }

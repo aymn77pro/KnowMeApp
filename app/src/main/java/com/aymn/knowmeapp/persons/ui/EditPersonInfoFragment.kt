@@ -1,16 +1,22 @@
 package com.aymn.knowmeapp.persons.ui
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.aymn.knowmeapp.ViewModelFactory
 import com.aymn.knowmeapp.network.model.PersonInformation
+import com.bumptech.glide.Glide
+import com.example.knowmeapp.R
 import com.example.knowmeapp.databinding.FragmentEditPersonInfoBinding
 
 class EditPersonInfoFragment : Fragment() {
@@ -19,6 +25,8 @@ class EditPersonInfoFragment : Fragment() {
     private val viewModel: PersonViewModel by activityViewModels {
         ViewModelFactory()
     }
+    private val REQUEST_CODE = 100
+    private var fileImage: Uri?=null
 
     private val navigationArgs: EditPersonInfoFragmentArgs by navArgs()
 
@@ -26,11 +34,6 @@ class EditPersonInfoFragment : Fragment() {
     val binding get() = _binding
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +47,8 @@ class EditPersonInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id = navigationArgs.id
+        fileImage = null
+        binding?.personImage?.setOnClickListener { openGalleryForImage() }
         if (id != "empty") {
             val x = viewModel.personData.value
             binding?.personeName?.setText(x?.Name)
@@ -53,6 +58,10 @@ class EditPersonInfoFragment : Fragment() {
             binding?.personTwitter?.setText(x?.twitter)
             binding?.personeFaceBook?.setText(x?.faceBook)
             binding?.personInfo?.setText(x?.personInformation)
+            Glide.with(requireContext()).load(viewModel.personData.value?.imageUri?.toUri())
+                .placeholder(R.drawable.loading_animation)
+                .error(R.drawable.ic_baseline_account_circle_24)
+                .into(binding?.personImage!!)
         }
         binding?.save?.setOnClickListener {
             if (binding?.personeName?.text.toString().isBlank()) {
@@ -69,8 +78,8 @@ class EditPersonInfoFragment : Fragment() {
                             binding?.personTwitter?.text.toString(),
                             binding?.personeFaceBook?.text.toString(),
                             binding?.personInfo?.text.toString()
-                        )
-                    )
+                            , imageUri = viewModel.personData.value?.imageUri!!
+                        ),fileImage)
                     viewModel.getOnePerson(id)
                 } else {
                     viewModel.setPersonData(
@@ -81,8 +90,8 @@ class EditPersonInfoFragment : Fragment() {
                             binding?.personLinkIn?.text.toString(),
                             binding?.personTwitter?.text.toString(),
                             binding?.personeFaceBook?.text.toString(),
-                            binding?.personInfo?.text.toString()
-                        )
+                            binding?.personInfo?.text.toString(), imageUri = fileImage.toString()
+                        ),fileImage
                     )
                 }
                 val action =
@@ -90,13 +99,23 @@ class EditPersonInfoFragment : Fragment() {
                 findNavController().navigate(action)
             }
         }
+    }
+    private fun openGalleryForImage() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, REQUEST_CODE)
+    }
 
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
+              binding?.personImage?.setImageURI(data?.data) // handle chosen image
+            fileImage = data?.data!!
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

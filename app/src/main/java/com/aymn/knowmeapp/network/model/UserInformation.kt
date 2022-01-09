@@ -1,5 +1,8 @@
 package com.aymn.knowmeapp.network.model
 
+import android.net.Uri
+import androidx.core.net.toUri
+
 data class UserInformation(
     var name: String? = "",
     var number: String? = "",
