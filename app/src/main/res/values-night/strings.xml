@@ -10,4 +10,7 @@
     <string name="twitter_account">Twitter account:</string>
     <string name="facebook_account">FaceBook account:</string>
     <string name="back">Back</string>
+    <string name="add_person">Add Person</string>
+    <string name="setting">Setting</string>
+    <string name="location">Location</string>
 </resources>

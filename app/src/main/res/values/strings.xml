@@ -13,4 +13,14 @@
     <string name="twitter_account">Twitter account:</string>
     <string name="facebook_account">FaceBook account:</string>
     <string name="back">Back</string>
+    <string name="add_person">Add Person</string>
+    <string name="normal_map">Normal Map</string>
+    <string name="hybrid_map">Hybrid Map</string>
+    <string name="satellite_map">Satellite Map</string>
+    <string name="terrain_map">Terrain Map</string>
+    <string name="lat_long_snippet">Lat: %1$.5f, Long: %2$.5f</string>
+    <string name="dropped_pin">Dropped Pin</string>
+    <string name="poi">poi</string>
+    <string name="setting">Setting</string>
+    <string name="location">Location</string>
 </resources>

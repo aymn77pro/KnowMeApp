@@ -17,7 +17,7 @@ class UserInfoViewModel(
     private val setUserInfoUseCase: SetUserInfoUseCase,
     private val getUserInfoUseCase: GetUserInfoUseCase
 ) : ViewModel() {
-    private var _user = MutableStateFlow(UserInformation())
+    private val _user = MutableStateFlow(UserInformation())
     val user = _user.asLiveData()
 
    private fun setUserInfo(userInfo: UserInformation) {

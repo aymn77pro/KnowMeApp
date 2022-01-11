@@ -1,9 +1,13 @@
 package com.aymn.knowmeapp.persons.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -58,17 +62,37 @@ class PersonInfoFragment : Fragment() {
     }
 
     private fun bind() {
+
         binding?.name?.text = viewModel.personData.value?.Name.toString()
+
         binding?.email?.text = viewModel.personData.value?.Email
+
         binding?.number?.text = viewModel.personData.value?.Number
+
         binding?.linkIn?.text = viewModel.personData.value?.linkIn
+
         binding?.teitter?.text = viewModel.personData.value?.twitter
+
         binding?.faceBook?.text = viewModel.personData.value?.faceBook
+
         binding?.personInfo?.text = viewModel.personData.value?.personInformation
+
         Glide.with(requireContext()).load(viewModel.personData.value?.imageUri?.toUri())
             .placeholder(R.drawable.loading_animation)
             .error(R.drawable.ic_baseline_account_circle_24)
             .into(binding?.personImage!!)
+
+        binding?.location?.setOnClickListener {
+            if (viewModel.personData.value?.lattLoac == "" && viewModel.personData.value?.longLoca == ""){
+                Toast.makeText(context, "go to map and choose your friend location :-)", Toast.LENGTH_LONG).show()
+            }else{
+                Log.d("TAG", "bind: ${viewModel.personData.value?.longLoca}  ")
+                val gmmIntentUri = Uri.parse("google.navigation:q=${viewModel.personData.value?.lattLoac},${viewModel.personData.value?.longLoca}")
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                startActivity(mapIntent)
+            }
+        }
     }
 
     override fun onDestroyView() {

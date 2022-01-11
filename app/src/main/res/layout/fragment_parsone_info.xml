@@ -181,7 +181,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.82"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/personInfo" />
+            app:layout_constraintTop_toBottomOf="@id/location" />
 
         <Button
             android:id="@+id/delete"
@@ -193,8 +193,19 @@
             android:text="Delete"
             android:textColor="#930404"
             app:layout_constraintEnd_toStartOf="@+id/editPersonInfo"
-            app:layout_constraintTop_toBottomOf="@+id/personInfo"
+            app:layout_constraintTop_toBottomOf="@+id/location"
             app:strokeColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/location"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@id/name"
+            app:layout_constraintTop_toBottomOf="@id/personInfo"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

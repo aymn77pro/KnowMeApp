@@ -2,8 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/setting"
+        app:showAsAction="never"
+        android:title="@string/setting"
+        />
+    <item
 android:id="@+id/singOutIcon"
-        app:showAsAction="always"
+        app:showAsAction="never"
         android:title="@string/sing_out"
         android:icon="@drawable/ic_baseline_login_24"/>
 </menu>

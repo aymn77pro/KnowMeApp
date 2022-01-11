@@ -21,7 +21,6 @@ import com.example.knowmeapp.databinding.FragmentEditPersonInfoBinding
 
 class EditPersonInfoFragment : Fragment() {
 
-
     private val viewModel: PersonViewModel by activityViewModels {
         ViewModelFactory()
     }
@@ -62,6 +61,7 @@ class EditPersonInfoFragment : Fragment() {
                 .placeholder(R.drawable.loading_animation)
                 .error(R.drawable.ic_baseline_account_circle_24)
                 .into(binding?.personImage!!)
+
         }
         binding?.save?.setOnClickListener {
             if (binding?.personeName?.text.toString().isBlank()) {
@@ -77,8 +77,10 @@ class EditPersonInfoFragment : Fragment() {
                             binding?.personLinkIn?.text.toString(),
                             binding?.personTwitter?.text.toString(),
                             binding?.personeFaceBook?.text.toString(),
-                            binding?.personInfo?.text.toString()
-                            , imageUri = viewModel.personData.value?.imageUri!!
+                            binding?.personInfo?.text.toString(),
+                            imageUri = viewModel.personData.value?.imageUri!!,
+                            lattLoac = viewModel.personData.value?.lattLoac,
+                            longLoca = viewModel.personData.value?.longLoca
                         ),fileImage)
                     viewModel.getOnePerson(id)
                 } else {
@@ -90,7 +92,10 @@ class EditPersonInfoFragment : Fragment() {
                             binding?.personLinkIn?.text.toString(),
                             binding?.personTwitter?.text.toString(),
                             binding?.personeFaceBook?.text.toString(),
-                            binding?.personInfo?.text.toString(), imageUri = fileImage.toString()
+                            binding?.personInfo?.text.toString(),
+                            imageUri = fileImage.toString(),
+                            lattLoac = viewModel.personData.value?.lattLoac,
+                            longLoca = viewModel.personData.value?.longLoca
                         ),fileImage
                     )
                 }
@@ -98,6 +103,10 @@ class EditPersonInfoFragment : Fragment() {
                     EditPersonInfoFragmentDirections.actionEditParsoneInfoFragmentToListOfPersonsFragment()
                 findNavController().navigate(action)
             }
+        }
+        binding?.map?.setOnClickListener {
+            val actionMap = EditPersonInfoFragmentDirections.actionEditParsoneInfoFragmentToMapsFragment(id)
+            findNavController().navigate(actionMap)
         }
     }
     private fun openGalleryForImage() {
@@ -109,7 +118,7 @@ class EditPersonInfoFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
-              binding?.personImage?.setImageURI(data?.data) // handle chosen image
+         //     binding?.personImage?.setImageURI(data?.data) // handle chosen image
             fileImage = data?.data!!
         }
     }
