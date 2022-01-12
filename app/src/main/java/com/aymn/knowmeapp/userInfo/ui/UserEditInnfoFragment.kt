@@ -73,6 +73,10 @@ class UserEditInnfoFragment : Fragment() {
             findNavController().navigate(action)
         }
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 //    private fun openGalleryForImage() {
 //        val intent = Intent(Intent.ACTION_PICK)
 //        intent.type = "image/*"

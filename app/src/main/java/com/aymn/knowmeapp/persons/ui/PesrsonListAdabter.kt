@@ -22,10 +22,7 @@ class PesrsonListAdabter(private val context: Context) :
 
     class PersonViewHolder(var binding: PersonItem1Binding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(personInformation: PersonInformation) {
-        binding.apply {
-        }
-        }
+
     }
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -39,14 +36,12 @@ class PesrsonListAdabter(private val context: Context) :
 
     override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
         val current = getItem(position)
-        holder.bind(current)
-
         Glide.with(context).load(current.imageUri.toUri())
             .placeholder(R.drawable.loading_animation).error(R.drawable.ic_baseline_account_circle_24)
-            .into(holder.binding.presonImage)
+            .into(holder.binding.img)
 
-        holder.binding
-            .cerdView.setOnClickListener {
+         holder.binding
+            .cardView.setOnClickListener {
             val action =
                 ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToParsoneInfoFragment(
                     current.id,current.Name
@@ -54,8 +49,8 @@ class PesrsonListAdabter(private val context: Context) :
             Log.d("TAG", "current id = ${current.id}")
             holder.itemView.findNavController().navigate(action)
         }
-
-        holder.binding.name.text = current.Name
+        holder.binding.stName.text = current.Name
+        holder.binding.stNumber.text = current.Number
     }
 
     companion object {

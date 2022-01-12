@@ -118,7 +118,7 @@ class EditPersonInfoFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
-         //     binding?.personImage?.setImageURI(data?.data) // handle chosen image
+              binding?.personImage?.setImageURI(data?.data) // handle chosen image
             fileImage = data?.data!!
         }
     }

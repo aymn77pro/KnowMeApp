@@ -97,6 +97,10 @@ class MapsFragment : Fragment() , OnMapReadyCallback {
         }
 
         }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
     override fun onMapReady(googleMap: GoogleMap) {
 
         map = googleMap
@@ -162,5 +166,6 @@ companion object {
     private const val REQUEST_CODE_PERMISSIONS = 10
     private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
 }
+
 
 }

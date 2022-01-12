@@ -1,8 +1,6 @@
 package com.aymn.knowmeapp.userInfo.ui
 
-import android.net.Uri
 import android.util.Log
-import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -51,4 +49,5 @@ class UserInfoViewModel(
                 }
         }
     }
+
 }

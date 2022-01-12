@@ -87,7 +87,7 @@ class PersonInfoFragment : Fragment() {
                 Toast.makeText(context, "go to map and choose your friend location :-)", Toast.LENGTH_LONG).show()
             }else{
                 Log.d("TAG", "bind: ${viewModel.personData.value?.longLoca}  ")
-                val gmmIntentUri = Uri.parse("google.navigation:q=${viewModel.personData.value?.lattLoac},${viewModel.personData.value?.longLoca}")
+                val gmmIntentUri = Uri.parse("geo:0,0?q=${viewModel.personData.value?.lattLoac},${viewModel.personData.value?.longLoca}")
                 val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                 mapIntent.setPackage("com.google.android.apps.maps")
                 startActivity(mapIntent)

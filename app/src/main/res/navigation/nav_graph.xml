@@ -49,6 +49,12 @@
         <action
             android:id="@+id/action_userInfoFragment_to_userEditInnfoFragment"
             app:destination="@id/userEditInnfoFragment" />
+        <action
+            android:id="@+id/action_userInfoFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_userInfoFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/userEditInnfoFragment"
@@ -110,4 +116,17 @@
             app:argType="string"
             android:defaultValue="empty" />
     </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.aymn.knowmeapp.persons.ui.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_settingFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.aymn.knowmeapp.prefrence.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

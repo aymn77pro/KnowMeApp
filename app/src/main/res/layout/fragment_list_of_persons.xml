@@ -6,7 +6,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/amber_1"
     tools:context="com.aymn.knowmeapp.persons.ui.ListOfPersonsFragment">
 
         <SearchView

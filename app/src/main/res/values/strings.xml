@@ -13,6 +13,9 @@
     <string name="twitter_account">Twitter account:</string>
     <string name="facebook_account">FaceBook account:</string>
     <string name="back">Back</string>
+    <string name="dark_theme_preference_value">Dark_theme</string>
+    <string name="light_theme_preference_value">Light_Theme</string>
+    <string name="system_theme_preference_value">System_Theme</string>
     <string name="add_person">Add Person</string>
     <string name="normal_map">Normal Map</string>
     <string name="hybrid_map">Hybrid Map</string>
@@ -23,4 +26,22 @@
     <string name="poi">poi</string>
     <string name="setting">Setting</string>
     <string name="location">Location</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="theme_preferences_key">My Prefrence</string>
+    <string name="dark_theme_description">Descripe</string>
+    <string name="light_theme_description">theme style</string>
+    <string name="system_theme_description">origin theme</string>
 </resources>

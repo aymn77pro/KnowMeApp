@@ -58,6 +58,8 @@ class UserInfoFragment : Fragment() {
                 findNavController().navigate(actionUserProfile)
                 true
             }
+            R.id.setting ->{ findNavController().navigate(UserInfoFragmentDirections.actionUserInfoFragmentToSettingsFragment())
+            true}
             else -> false
         }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
