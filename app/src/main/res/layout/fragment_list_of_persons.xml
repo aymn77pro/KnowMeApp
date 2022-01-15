@@ -8,56 +8,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.aymn.knowmeapp.persons.ui.ListOfPersonsFragment">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/aaa"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:liftOnScroll="true"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/topAppBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:title="@string/page_title"
+                    app:menu="@menu/user_profile"
+                    app:layout_scrollFlags="scroll|enterAlways|snap"
+                    style="@style/Widget.App.Toolbar"
+                    />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
         <SearchView
             android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aaa"
             />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="602dp"
-            android:clipToPadding="true"
-            android:foregroundGravity="center_horizontal"
-            android:orientation="vertical"
+            android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/space"
+            app:layout_constraintBottom_toTopOf="@+id/add_parsone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/space2"
+            app:layout_constraintTop_toBottomOf="@+id/search"
             tools:listitem="@layout/person_item1" />
         <Button
             android:id="@+id/add_parsone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_person"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            style="?attr/materialButtonOutlinedStyle"
-            android:textStyle="bold"
+            style="@style/Widget.App.Button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintVertical_bias="1.0" />
-
-        <Space
-            android:id="@+id/space"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/add_parsone" />
-
-        <Space
-            android:id="@+id/space2"
-            android:layout_width="420dp"
-            android:layout_height="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search"
-            />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

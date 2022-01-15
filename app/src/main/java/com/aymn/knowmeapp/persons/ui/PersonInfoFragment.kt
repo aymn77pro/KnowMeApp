@@ -77,7 +77,7 @@ class PersonInfoFragment : Fragment() {
 
         binding?.personInfo?.text = viewModel.personData.value?.personInformation
 
-        Glide.with(requireContext()).load(viewModel.personData.value?.imageUri?.toUri())
+        Glide.with(requireContext()).load(viewModel.personData.value?.imageUri?.toUri()).circleCrop()
             .placeholder(R.drawable.loading_animation)
             .error(R.drawable.ic_baseline_account_circle_24)
             .into(binding?.personImage!!)

@@ -5,78 +5,143 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.aymn.knowmeapp.ViewModelFactory
 import com.aymn.knowmeapp.network.model.UserInformation
 import com.bumptech.glide.Glide
 import com.example.knowmeapp.R
 import com.example.knowmeapp.databinding.FragmentUserEditInnfoBinding
+import com.example.knowmeapp.databinding.UserProfileBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 
 
 class UserEditInnfoFragment : Fragment() {
 
-    private var _binding: FragmentUserEditInnfoBinding? = null
-    private val binding get() = _binding
+    private var _binding: UserProfileBinding? = null
+    private val binding get() = _binding!!
 
-    private val REQUEST_CODE = 100
-    lateinit var fileImage: Uri
+//    private val REQUEST_CODE = 100
+//    lateinit var fileImage: Uri
 
     private val viewModel: UserInfoViewModel by activityViewModels {
         ViewModelFactory()
     }
+    private lateinit var auth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentUserEditInnfoBinding.inflate(inflater, container, false)
+        _binding = UserProfileBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
         return binding?.root
     }
 
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.sing_out, menu)
+//    }
+
+//    override fun onOptionsItemSelected(item: MenuItem) =
+//        when (item.itemId) {
+//            R.id.singOutIcon -> {
+//                singOut()
+//                val actionUserProfile =
+//                    UserEditInnfoFragmentDirections.actionUserEditInnfoFragmentToSingInFragment()
+//                findNavController().navigate(actionUserProfile)
+//                true
+//            }
+//            R.id.setting ->{ findNavController().navigate(UserEditInnfoFragmentDirections.actionUserEditInnfoFragmentToSettingsFragment())
+//                true}
+//            else -> false
+//        }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding?.topAppBar?.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.singOutIcon -> {
+                    singOut()
+                    val actionUserProfile =
+                        UserEditInnfoFragmentDirections.actionUserEditInnfoFragmentToSingInFragment()
+                    findNavController().navigate(actionUserProfile)
+                    true
+                }
+                R.id.setting ->{ findNavController().navigate(UserEditInnfoFragmentDirections.actionUserEditInnfoFragmentToSettingsFragment())
+                    true}
+                else -> false
+            }
 
-        binding?.Name?.setText(viewModel.user.value?.name)
-        binding?.number?.setText(viewModel.user.value?.number)
-        binding?.Email?.setText(viewModel.user.value?.email)
-        binding?.LinkIn?.setText(viewModel.user.value?.linkIn)
-        binding?.Twitter?.setText(viewModel.user.value?.twitter)
-        binding?.FaceBook?.setText(viewModel.user.value?.faceBook)
+        }
 
-        fileImage ="".toUri()
+        auth = Firebase.auth
+        viewModel.getUserInfo()
 
-        //binding?.personImage?.setImageResource(R.drawable.ic_baseline_account_circle_24)
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.web_clint_id))
+            .requestEmail().build()
+
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+
+        viewModel.user.observe(viewLifecycleOwner,{
+            binding.user=it
+            binding.executePendingBindings()
+        })
+
+//        fileImage ="".toUri()
+
         Glide.with(requireContext()).load(Firebase.auth.currentUser?.photoUrl)
             .placeholder(R.drawable.loading_animation)
+            .circleCrop()
             .error(R.drawable.ic_baseline_account_circle_24)
-            .into(binding?.personImage!!)
+            .into(binding?.userImage!!)
 
-        binding?.save?.setOnClickListener {
+
+        binding?.update?.setOnClickListener {
+            val value= viewModel.user.value
             viewModel.setNewUserInfo(
-                binding?.Name?.text.toString(),
-                binding?.number?.text.toString(),
-                binding?.Email?.text.toString(),
-                binding?.LinkIn?.text.toString(),
-                binding?.Twitter?.text.toString(),
-                binding?.FaceBook?.text.toString()
+            value?.name.toString(),value?.number.toString(),value?.email.toString(),
+                value?.linkIn.toString(),value?.twitter.toString(),value?.faceBook.toString()
             )
-            val action = UserEditInnfoFragmentDirections.actionUserEditInnfoFragmentToUserInfoFragment()
+            val action = UserEditInnfoFragmentDirections.actionUserEditInnfoFragmentToListOfPersonsFragment()
             findNavController().navigate(action)
         }
     }
+
+    private fun singOut() {
+        Firebase.auth.signOut()
+        viewModel.user.value?.name=null
+        viewModel.user.value?.email = null
+        viewModel.user.value?.number = null
+        viewModel.user.value?.linkIn = null
+        viewModel.user.value?.twitter = null
+        viewModel.user.value?.faceBook = null
+
+        googleSignInClient.signOut()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
+
 //    private fun openGalleryForImage() {
 //        val intent = Intent(Intent.ACTION_PICK)
 //        intent.type = "image/*"

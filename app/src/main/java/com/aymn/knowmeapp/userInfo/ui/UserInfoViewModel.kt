@@ -18,6 +18,10 @@ class UserInfoViewModel(
     private val _user = MutableStateFlow(UserInformation())
     val user = _user.asLiveData()
 
+    init {
+        getUserInfo()
+    }
+
    private fun setUserInfo(userInfo: UserInformation) {
         viewModelScope.launch {
             Log.e("TAG", "setUserInfo: i am in set viewModel $userInfo")
@@ -49,5 +53,4 @@ class UserInfoViewModel(
                 }
         }
     }
-
 }

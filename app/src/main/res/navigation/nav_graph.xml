@@ -23,9 +23,6 @@
             android:id="@+id/action_listOfContactFragment_to_singInFragment"
             app:destination="@id/singInFragment" />
         <action
-            android:id="@+id/action_listOfPersonsFragment_to_userInfoFragment"
-            app:destination="@id/userInfoFragment" />
-        <action
             android:id="@+id/action_listOfPersonsFragment_to_parsoneInfoFragment"
             app:destination="@id/parsoneInfoFragment" />
         <action
@@ -34,36 +31,32 @@
         <action
             android:id="@+id/action_listOfContactFragment_to_editParsoneInfoFragment"
             app:destination="@id/editParsoneInfoFragment" />
+        <action
+            android:id="@+id/action_listOfPersonsFragment_to_userEditInnfoFragment2"
+            app:destination="@id/userEditInnfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/userInfoFragment"
         android:name="com.aymn.knowmeapp.userInfo.ui.UserInfoFragment"
         android:label="user profile"
-        tools:layout="@layout/fragment_user_info">
-        <action
-            android:id="@+id/action_userInfoFragment_to_singInFragment"
-            app:destination="@id/singInFragment" />
-        <action
-            android:id="@+id/action_userInfoFragment_to_listOfContactFragment"
-            app:destination="@id/listOfPersonsFragment" />
-        <action
-            android:id="@+id/action_userInfoFragment_to_userEditInnfoFragment"
-            app:destination="@id/userEditInnfoFragment" />
-        <action
-            android:id="@+id/action_userInfoFragment_to_settingFragment"
-            app:destination="@id/settingFragment" />
-        <action
-            android:id="@+id/action_userInfoFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_user_info"/>
     <fragment
         android:id="@+id/userEditInnfoFragment"
         android:name="com.aymn.knowmeapp.userInfo.ui.UserEditInnfoFragment"
         android:label="profile"
         tools:layout="@layout/fragment_user_edit_innfo">
         <action
-            android:id="@+id/action_userEditInnfoFragment_to_userInfoFragment"
-            app:destination="@id/userInfoFragment" />
+            android:id="@+id/action_userEditInnfoFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_userEditInnfoFragment_to_listOfPersonsFragment"
+            app:destination="@id/listOfPersonsFragment" />
+        <action
+            android:id="@+id/action_userEditInnfoFragment_to_singInFragment"
+            app:destination="@id/singInFragment" />
+        <action
+            android:id="@+id/action_userEditInnfoFragment_to_listOfPersonsFragment2"
+            app:destination="@id/listOfPersonsFragment" />
     </fragment>
     <fragment
         android:id="@+id/parsoneInfoFragment"
@@ -115,15 +108,6 @@
             android:name="id"
             app:argType="string"
             android:defaultValue="empty" />
-    </fragment>
-    <fragment
-        android:id="@+id/settingFragment"
-        android:name="com.aymn.knowmeapp.persons.ui.SettingFragment"
-        android:label="fragment_setting"
-        tools:layout="@layout/fragment_setting" >
-        <action
-            android:id="@+id/action_settingFragment_to_userInfoFragment"
-            app:destination="@id/userInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

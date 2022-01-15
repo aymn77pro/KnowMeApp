@@ -29,19 +29,18 @@ class PesrsonListAdabter(private val context: Context) :
         viewType: Int
     ): PesrsonListAdabter.PersonViewHolder {
         return PersonViewHolder(
-            PersonItem1Binding.inflate(LayoutInflater.from(parent.context))
-        )
-
+      PersonItem1Binding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
+
         val current = getItem(position)
-        Glide.with(context).load(current.imageUri.toUri())
-            .placeholder(R.drawable.loading_animation).error(R.drawable.ic_baseline_account_circle_24)
-            .into(holder.binding.img)
+//        Glide.with(context).load(current.imageUri.toUri())
+//            .placeholder(R.drawable.loading_animation).error(R.drawable.ic_baseline_account_circle_24)
+//            .into(holder.binding.img)
 
          holder.binding
-            .cardView.setOnClickListener {
+            .root.setOnClickListener {
             val action =
                 ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToParsoneInfoFragment(
                     current.id,current.Name
@@ -49,9 +48,10 @@ class PesrsonListAdabter(private val context: Context) :
             Log.d("TAG", "current id = ${current.id}")
             holder.itemView.findNavController().navigate(action)
         }
-        holder.binding.stName.text = current.Name
-        holder.binding.stNumber.text = current.Number
-    }
+        holder.binding.name.text = current.Name
+       Glide.with(context).load(current.imageUri.toUri()).circleCrop().placeholder(R.drawable.loading_animation)
+           .error(R.drawable.ic_baseline_account_circle_24).into(holder.binding.presonImage)
+        }
 
     companion object {
         private val DiffCallBack = object : DiffUtil.ItemCallback<PersonInformation>() {

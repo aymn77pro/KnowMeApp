@@ -50,7 +50,7 @@ class MapsFragment : Fragment() , OnMapReadyCallback {
             if (locationLatt != "" && locationLong != ""){
                 val id = navigationArgs.id
                 viewModel.personData.value?.lattLoac = locationLatt
-                Log.d("TAG", "viewModel.personData.value?.lattLoac = locationLatt: ${viewModel.personData.value?.lattLoac} ")
+              //  Log.d("TAG", "viewModel.personData.value?.lattLoac = locationLatt: ${viewModel.personData.value?.lattLoac} ")
                 viewModel.personData.value?.longLoca = locationLong
                val actionloac = MapsFragmentDirections.actionMapsFragmentToEditParsoneInfoFragment(id = id)
             findNavController().navigate(actionloac)}

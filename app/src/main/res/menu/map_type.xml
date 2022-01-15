@@ -4,9 +4,10 @@
     >
     <item
         android:id="@+id/saveLocation"
+        android:icon="@drawable/ic_baseline_add_location_24"
+        android:iconTint="#0E0E0E"
         android:title="save location"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_baseline_add_location_24"  />
+        app:showAsAction="always" />
     <item
         android:id="@+id/normal_map"
         android:title="@string/normal_map"
