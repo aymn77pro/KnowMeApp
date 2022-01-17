@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         >
         <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/icons8_person_24" />
+        <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCblrQ8IkN6B53q5ps2DJ6xDZgUJrTFs68" />
 

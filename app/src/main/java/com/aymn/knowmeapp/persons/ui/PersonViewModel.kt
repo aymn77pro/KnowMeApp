@@ -1,6 +1,7 @@
 package com.aymn.knowmeapp.persons.ui
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -34,6 +35,8 @@ class PersonViewModel(
         viewModelScope.launch {
             getPersonDataUseCase.invoke().collect { persons ->
                 _persons.update { persons }
+                Log.e("TAG", "getPersonData: $persons", )
+
             }
         }
     }

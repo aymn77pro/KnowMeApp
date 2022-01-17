@@ -8,12 +8,13 @@ data class PersonInformation(
     var Name: String = "",
     var Number: String = "",
     var Email: String = "",
-    var linkIn: String = "",
-    var twitter: String = "",
-    var faceBook: String = "",
-    var personInformation: String = "",
+    val linkIn: String = "",
+    val twitter: String = "",
+    val faceBook: String = "",
+    val personInformation: String = "",
     var id: String = "",
     var imageUri: String = "",
-    var lattLoac : String?= "",
-    var longLoca : String? = ""
+    val lattLoac : String?= "",
+    val longLoca : String? = "",
+    var imported : Boolean? = false
 )

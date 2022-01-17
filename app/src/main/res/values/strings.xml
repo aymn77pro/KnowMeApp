@@ -47,4 +47,10 @@
     <string name="update">UPDATE</string>
     <string name="friends_and_family">friends and family</string>
     <string name="page_title">my list</string>
+    <string name="imported_person">Imported</string>
+    <string name="edit">EDIT</string>
+    <string name="delete">DELETE</string>
+    <string name="delete_question">Delete %s</string>
+    <string name="mapMenu">Map</string>
+    <string name="personInfo">Person information</string>
 </resources>

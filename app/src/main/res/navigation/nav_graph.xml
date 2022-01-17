@@ -26,14 +26,11 @@
             android:id="@+id/action_listOfPersonsFragment_to_parsoneInfoFragment"
             app:destination="@id/parsoneInfoFragment" />
         <action
-            android:id="@+id/action_listOfPersonsFragment_to_editParsoneInfoFragment"
-            app:destination="@id/editParsoneInfoFragment" />
-        <action
-            android:id="@+id/action_listOfContactFragment_to_editParsoneInfoFragment"
-            app:destination="@id/editParsoneInfoFragment" />
-        <action
             android:id="@+id/action_listOfPersonsFragment_to_userEditInnfoFragment2"
             app:destination="@id/userEditInnfoFragment" />
+        <action
+            android:id="@+id/action_listOfPersonsFragment_to_parsoneInfoFragment2"
+            app:destination="@id/parsoneInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/userInfoFragment"
@@ -63,27 +60,33 @@
         android:name="com.aymn.knowmeapp.persons.ui.PersonInfoFragment"
         android:label="{name}"
         tools:layout="@layout/fragment_parsone_info">
-        <action
-            android:id="@+id/action_parsoneInfoFragment_to_editParsoneInfoFragment"
-            app:destination="@id/editParsoneInfoFragment" />
         <argument
             android:name="id"
-            app:argType="string" />
+            app:argType="string"
+            android:defaultValue="empty" />
         <action
             android:id="@+id/action_parsoneInfoFragment_to_listOfPersonsFragment"
             app:destination="@id/listOfPersonsFragment" />
         <argument
             android:name="name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_parsoneInfoFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <argument
+            android:name="latt"
+            app:argType="string"
+            android:defaultValue=" " />
+        <argument
+            android:name="long"
+            app:argType="string"
+            android:defaultValue=" " />
     </fragment>
     <fragment
         android:id="@+id/editParsoneInfoFragment"
         android:name="com.aymn.knowmeapp.persons.ui.EditPersonInfoFragment"
         android:label="{name}"
         tools:layout="@layout/fragment_edit_person_info">
-        <action
-            android:id="@+id/action_editParsoneInfoFragment_to_listOfPersonsFragment"
-            app:destination="@id/listOfPersonsFragment" />
         <argument
             android:name="id"
             android:defaultValue="empty"
@@ -92,25 +95,30 @@
             android:name="name"
             app:argType="string"
             android:defaultValue="xx" />
-        <action
-            android:id="@+id/action_editParsoneInfoFragment_to_mapsFragment"
-            app:destination="@id/mapsFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.aymn.knowmeapp.persons.ui.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" >
-        <action
-            android:id="@+id/action_mapsFragment_to_editParsoneInfoFragment"
-            app:destination="@id/editParsoneInfoFragment" />
         <argument
             android:name="id"
             app:argType="string"
             android:defaultValue="empty" />
+        <action
+            android:id="@+id/action_mapsFragment_to_parsoneInfoFragment"
+            app:destination="@id/parsoneInfoFragment" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            android:defaultValue="Add person" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.aymn.knowmeapp.prefrence.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_userEditInnfoFragment"
+            app:destination="@id/userEditInnfoFragment" />
+    </fragment>
 </navigation>

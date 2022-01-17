@@ -23,18 +23,24 @@ class PesrsonListAdabter(private val context: Context) :
     class PersonViewHolder(var binding: PersonItem1Binding) :
         RecyclerView.ViewHolder(binding.root) {
 
+
+
+
     }
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): PesrsonListAdabter.PersonViewHolder {
-        return PersonViewHolder(
-      PersonItem1Binding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return PesrsonListAdabter.PersonViewHolder(
+            PersonItem1Binding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
     }
 
-    override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
-
+    override fun onBindViewHolder(holder: PesrsonListAdabter.PersonViewHolder, position: Int) {
         val current = getItem(position)
+
+        holder.binding.name.text = current.Name
+
 //        Glide.with(context).load(current.imageUri.toUri())
 //            .placeholder(R.drawable.loading_animation).error(R.drawable.ic_baseline_account_circle_24)
 //            .into(holder.binding.img)
@@ -43,12 +49,13 @@ class PesrsonListAdabter(private val context: Context) :
             .root.setOnClickListener {
             val action =
                 ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToParsoneInfoFragment(
-                    current.id,current.Name
-                )
+                    current.id,current.Name,current.lattLoac.toString(),current.longLoca.toString())
             Log.d("TAG", "current id = ${current.id}")
             holder.itemView.findNavController().navigate(action)
         }
-        holder.binding.name.text = current.Name
+        Log.d("TAG", "onBindViewHolder:${current.Name}+${current.lattLoac}+${current.longLoca}")
+
+
        Glide.with(context).load(current.imageUri.toUri()).circleCrop().placeholder(R.drawable.loading_animation)
            .error(R.drawable.ic_baseline_account_circle_24).into(holder.binding.presonImage)
         }
@@ -59,14 +66,14 @@ class PesrsonListAdabter(private val context: Context) :
                 oldItem: PersonInformation,
                 newItem: PersonInformation
             ): Boolean {
-                return oldItem.Name == newItem.Name
+                return oldItem.Name === newItem.Name
             }
 
             override fun areContentsTheSame(
                 oldItem: PersonInformation,
                 newItem: PersonInformation
             ): Boolean {
-                return oldItem.Name == newItem.Name
+                return oldItem == newItem
             }
         }
     }

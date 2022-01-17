@@ -1,6 +1,7 @@
 package com.aymn.knowmeapp.persons.ui
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -42,42 +43,42 @@ class MapsFragment : Fragment() , OnMapReadyCallback {
         setHasOptionsMenu(true)
         return binding?.root
     }
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.map_type, menu)
-    }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.saveLocation ->{
-            if (locationLatt != "" && locationLong != ""){
-                val id = navigationArgs.id
-                viewModel.personData.value?.lattLoac = locationLatt
-              //  Log.d("TAG", "viewModel.personData.value?.lattLoac = locationLatt: ${viewModel.personData.value?.lattLoac} ")
-                viewModel.personData.value?.longLoca = locationLong
-               val actionloac = MapsFragmentDirections.actionMapsFragmentToEditParsoneInfoFragment(id = id)
-            findNavController().navigate(actionloac)}
-            else {
-                Toast.makeText(context, "please choose your friend location", Toast.LENGTH_SHORT).show()
-            }
-            true
-        }
-        R.id.normal_map -> {
-            map?.mapType = GoogleMap.MAP_TYPE_NORMAL
-            true
-        }
-        R.id.hybrid_map -> {
-            map?.mapType = GoogleMap.MAP_TYPE_HYBRID
-            true
-        }
-        R.id.satellite_map -> {
-            map?.mapType = GoogleMap.MAP_TYPE_SATELLITE
-            true
-        }
-        R.id.terrain_map -> {
-            map?.mapType = GoogleMap.MAP_TYPE_TERRAIN
-            true
-        }
-        else -> super.onOptionsItemSelected(item)
-    }
+
+    @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding?.topAppBar?.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.saveLocation ->{
+                    if (locationLatt != "" && locationLong != ""){
+                        val id = navigationArgs.id
+                        val actionloac = MapsFragmentDirections.actionMapsFragmentToParsoneInfoFragment(id = id,navigationArgs.name,
+                            locationLatt.toString(),locationLong.toString())
+                        findNavController().navigate(actionloac)}
+                    else {
+                        Toast.makeText(context, "please choose your friend location", Toast.LENGTH_SHORT).show()
+                    }
+                    true
+                }
+                R.id.normal_map -> {
+                    map?.mapType = GoogleMap.MAP_TYPE_NORMAL
+                    true
+                }
+                R.id.hybrid_map -> {
+                    map?.mapType = GoogleMap.MAP_TYPE_HYBRID
+                    true
+                }
+                R.id.satellite_map -> {
+                    map?.mapType = GoogleMap.MAP_TYPE_SATELLITE
+                    true
+                }
+                R.id.terrain_map -> {
+                    map?.mapType = GoogleMap.MAP_TYPE_TERRAIN
+                    true
+                }
+                else -> super.onOptionsItemSelected(it)
+            }
+
+        }
 
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.myMap) as SupportMapFragment
@@ -91,11 +92,10 @@ class MapsFragment : Fragment() , OnMapReadyCallback {
                     this.requireActivity(),
                     REQUIRED_PERMISSIONS,
                     REQUEST_CODE_PERMISSIONS
-                )
+                    )
+                }
+
             }
-
-        }
-
         }
     override fun onDestroyView() {
         super.onDestroyView()
@@ -142,6 +142,7 @@ class MapsFragment : Fragment() , OnMapReadyCallback {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
+    @SuppressLint("MissingPermission")
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults:
         IntArray
