@@ -109,10 +109,10 @@
                             android:id="@+id/countContact"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="20sp"
+                            android:layout_centerInParent="true"
                             android:text="200"
-                            android:textStyle="bold"
-                            android:layout_centerInParent="true" />
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
 
                     </RelativeLayout>

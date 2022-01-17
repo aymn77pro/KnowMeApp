@@ -4,7 +4,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.aymn.knowmeapp.network.model.PersonInformation
 import com.aymn.knowmeapp.network.model.UserInformation
+import com.aymn.knowmeapp.persons.domain.GetPersonDataUseCase
 import com.aymn.knowmeapp.userInfo.domain.GetUserInfoUseCase
 import com.aymn.knowmeapp.userInfo.domain.SetUserInfoUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,10 +15,14 @@ import kotlinx.coroutines.launch
 
 class UserInfoViewModel(
     private val setUserInfoUseCase: SetUserInfoUseCase,
-    private val getUserInfoUseCase: GetUserInfoUseCase
+    private val getUserInfoUseCase: GetUserInfoUseCase,
+    private val getPersonDataUseCase: GetPersonDataUseCase
 ) : ViewModel() {
     private val _user = MutableStateFlow(UserInformation())
     val user = _user.asLiveData()
+
+    private val _userFriendList = MutableStateFlow<List<PersonInformation>>(emptyList())
+    val userFriendList = _userFriendList.asLiveData()
 
     init {
         getUserInfo()
@@ -51,6 +57,16 @@ class UserInfoViewModel(
                     }
                     Log.d("TAG", "kkkkkkkkkk: ${userInfor}")
                 }
+        }
+    }
+
+    fun getUserFrindList(){
+        viewModelScope.launch {
+            getPersonDataUseCase.invoke().collect{ friendList ->
+                _userFriendList.update {
+                    friendList
+                }
+            }
         }
     }
 }

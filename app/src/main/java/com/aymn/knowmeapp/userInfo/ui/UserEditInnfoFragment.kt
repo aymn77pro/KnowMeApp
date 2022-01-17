@@ -1,23 +1,15 @@
 package com.aymn.knowmeapp.userInfo.ui
 
-import android.app.Activity
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import android.view.*
-import androidx.core.net.toUri
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.aymn.knowmeapp.ViewModelFactory
-import com.aymn.knowmeapp.network.model.UserInformation
 import com.bumptech.glide.Glide
 import com.example.knowmeapp.R
-import com.example.knowmeapp.databinding.FragmentUserEditInnfoBinding
 import com.example.knowmeapp.databinding.UserProfileBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -25,7 +17,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.launch
 
 
 class UserEditInnfoFragment : Fragment() {
@@ -52,25 +43,6 @@ class UserEditInnfoFragment : Fragment() {
         return binding?.root
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.sing_out, menu)
-//    }
-
-//    override fun onOptionsItemSelected(item: MenuItem) =
-//        when (item.itemId) {
-//            R.id.singOutIcon -> {
-//                singOut()
-//                val actionUserProfile =
-//                    UserEditInnfoFragmentDirections.actionUserEditInnfoFragmentToSingInFragment()
-//                findNavController().navigate(actionUserProfile)
-//                true
-//            }
-//            R.id.setting ->{ findNavController().navigate(UserEditInnfoFragmentDirections.actionUserEditInnfoFragmentToSettingsFragment())
-//                true}
-//            else -> false
-//        }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.topAppBar?.setOnMenuItemClickListener {
@@ -82,15 +54,19 @@ class UserEditInnfoFragment : Fragment() {
                     findNavController().navigate(actionUserProfile)
                     true
                 }
-                R.id.setting ->{ findNavController().navigate(UserEditInnfoFragmentDirections.actionUserEditInnfoFragmentToSettingsFragment())
-                    true}
+                R.id.setting -> {
+                    findNavController().navigate(UserEditInnfoFragmentDirections.actionUserEditInnfoFragmentToSettingsFragment())
+                    true
+                }
                 else -> false
             }
 
         }
 
         auth = Firebase.auth
+
         viewModel.getUserInfo()
+        viewModel.getUserFrindList()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.web_clint_id))
@@ -98,13 +74,13 @@ class UserEditInnfoFragment : Fragment() {
 
         googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
-        viewModel.user.observe(viewLifecycleOwner,{
-            binding.user=it
+        viewModel.user.observe(viewLifecycleOwner, {
+            binding.user = it
             binding.executePendingBindings()
         })
-
-//        fileImage ="".toUri()
-
+        viewModel.userFriendList.observe(viewLifecycleOwner,{
+            binding?.countContact?.setText(it.size.toString())
+        })
         Glide.with(requireContext()).load(Firebase.auth.currentUser?.photoUrl)
             .placeholder(R.drawable.loading_animation)
             .circleCrop()
@@ -113,25 +89,32 @@ class UserEditInnfoFragment : Fragment() {
 
 
         binding?.update?.setOnClickListener {
-            val value= viewModel.user.value
-            viewModel.setNewUserInfo(
-            value?.name.toString(),value?.number.toString(),value?.email.toString(),
-                value?.linkIn.toString(),value?.twitter.toString(),value?.faceBook.toString()
-            )
-            val action = UserEditInnfoFragmentDirections.actionUserEditInnfoFragmentToListOfPersonsFragment()
+            binding.apply {
+                viewModel.setNewUserInfo(
+                    Name.text.toString(),
+                    userNumber.text.toString(),
+                    email.text.toString(),
+                    linkIn.text.toString(),
+                    twitter.text.toString(),
+                    faceBook.text.toString()
+                )
+            }
+            val action =
+                UserEditInnfoFragmentDirections.actionUserEditInnfoFragmentToListOfPersonsFragment()
             findNavController().navigate(action)
         }
     }
 
     private fun singOut() {
         Firebase.auth.signOut()
-        viewModel.user.value?.name=null
-        viewModel.user.value?.email = null
-        viewModel.user.value?.number = null
-        viewModel.user.value?.linkIn = null
-        viewModel.user.value?.twitter = null
-        viewModel.user.value?.faceBook = null
-
+        binding.apply {
+            Name.text = null
+            userNumber.text = null
+            email.text = null
+            linkIn.text = null
+            twitter.text = null
+            faceBook.text = null
+        }
         googleSignInClient.signOut()
     }
 
@@ -139,21 +122,4 @@ class UserEditInnfoFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
-
-//    private fun openGalleryForImage() {
-//        val intent = Intent(Intent.ACTION_PICK)
-//        intent.type = "image/*"
-//        startActivityForResult(intent, REQUEST_CODE)
-//    }
-//
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
-//          //  binding?.personImage?.setImageURI(data?.data) // handle chosen image
-//            fileImage = data?.data!!
-//
-//        }
-//    }
 }

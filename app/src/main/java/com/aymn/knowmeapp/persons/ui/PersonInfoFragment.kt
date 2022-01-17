@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.net.toUri
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -53,36 +54,101 @@ class PersonInfoFragment : Fragment() {
         viewModel.getOnePerson(id)
 
 
-        if (id != "empty"){
-        viewModel.personData.observe(viewLifecycleOwner, { personData ->
-            binding?.person = personData
-            Log.e("TAG", "onViewCreated:$personData ", )
-            binding?.executePendingBindings()
-            //region location
-            binding?.locationCard?.setOnClickListener {
-                if (personData.lattLoac.isNullOrBlank() && personData.longLoca.isNullOrBlank()) {
-                    Toast.makeText(
-                        context,
-                        "go to map and choose your friend location :-)",
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else {
-                    Log.d("TAG", "location: ${navigationArgs.latt}+${navigationArgs.long}  ")
-                    val gmmIntentUri =
-                        Uri.parse("geo:0,0?q=${personData.lattLoac},${personData.longLoca}")
-                    Log.d("TAG", "value of location: ${viewModel.personData.value?.lattLoac} ")
-                    val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-                    mapIntent.setPackage("com.google.android.apps.maps")
-                    startActivity(mapIntent)
-                }
-            }
-            binding?.locationCard?.setOnLongClickListener {
-                val selectLocation = PersonInfoFragmentDirections.actionParsoneInfoFragmentToMapsFragment(id = id , name = personData.Name)
-                findNavController().navigate(selectLocation)
-                true
-            }
-            //endregion
-        })}
+
+       if (id != "empty"){
+           binding?.delete?.setOnClickListener {
+               showDeleteDialog()
+           }
+               viewModel.personData.observe(viewLifecycleOwner, { personData ->
+                   binding?.person = personData
+                   Log.e("TAG", "onViewCreated:${personData.imported} ", )
+                   binding?.executePendingBindings()
+
+                   //region location
+                   binding?.locationCard?.setOnClickListener {
+                       if (personData.lattLoac.isNullOrBlank() && personData.longLoca.isNullOrBlank()) {
+                           Toast.makeText(
+                               context,
+                               "go to map and choose your friend location :-)",
+                               Toast.LENGTH_LONG
+                           ).show()
+                       } else {
+                           Log.d("TAG", "location: ${navigationArgs.latt}+${navigationArgs.long}  ")
+                           val gmmIntentUri =
+                               Uri.parse("geo:0,0?q=${personData.lattLoac},${personData.longLoca}")
+                           val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                           mapIntent.setPackage("com.google.android.apps.maps")
+                           startActivity(mapIntent)
+                       }
+                   }
+                   binding?.locationCard?.setOnLongClickListener {
+                       val selectLocation = PersonInfoFragmentDirections.actionParsoneInfoFragmentToMapsFragment(id = id , name = personData.Name)
+                       findNavController().navigate(selectLocation)
+                       true
+                   }
+                   //endregion
+
+                   //region imported
+                   if (personData.imported == true){
+                       binding?.importedImage?.playAnimation()
+                   }
+                   binding?.iportedCard?.setOnClickListener {
+                       Log.d("TAG", "imported:${personData.imported}")
+                       if (personData.imported == true){
+                           personData.imported = false
+                           binding?.importedImage?.frame = 1
+                       }       else {
+                           personData.imported = true
+                           binding?.importedImage?.playAnimation()
+                       }
+                   }
+                   //endregion
+
+
+               })
+           }else {
+           //region location
+           binding?.locationCard?.setOnClickListener {
+               if (navigationArgs.latt.isNullOrBlank() && navigationArgs.long.isNullOrBlank()) {
+                   Toast.makeText(
+                       context,
+                       "go to map and choose your friend location :-)",
+                       Toast.LENGTH_LONG
+                   ).show()
+               } else {
+                   Log.d("TAG", "location: ${navigationArgs.latt}+${navigationArgs.long}  ")
+                   val gmmIntentUri =
+                       Uri.parse("geo:0,0?q=${navigationArgs.latt},${navigationArgs.long}")
+                   val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                   mapIntent.setPackage("com.google.android.apps.maps")
+                   startActivity(mapIntent)
+               }
+           }
+           binding?.locationCard?.setOnLongClickListener {
+               val selectLocation = PersonInfoFragmentDirections.actionParsoneInfoFragmentToMapsFragment(id = id , name = "Add location")
+               findNavController().navigate(selectLocation)
+               true
+           }
+           //endregion
+
+           //region imported
+           binding?.iportedCard?.setOnClickListener {
+                 viewModel.personData.observe(viewLifecycleOwner,{ personData ->
+                     if (personData.imported == false){
+                     personData.imported = true
+                     binding?.importedImage?.playAnimation()
+                     }else{
+                         personData.imported = false
+                         binding?.importedImage?.frame = 1
+                     }
+                 })
+
+               }
+           //endregion
+            binding?.delete?.isVisible = false
+           }
+
+
 
         binding?.userImage?.setOnClickListener {
             openGalleryForImage()
@@ -141,23 +207,25 @@ class PersonInfoFragment : Fragment() {
             showDeleteDialog()
         }
         //region card action for location
-        binding?.locationCard?.setOnClickListener {
-            if (viewModel.personData.value?.lattLoac == "" && viewModel.personData.value?.longLoca == "") {
-                Toast.makeText(
-                    context,
-                    "go to map and choose your friend location :-)",
-                    Toast.LENGTH_LONG
-                ).show()
-            } else {
-                Log.d("TAG", "bind: ${viewModel.personData.value?.longLoca}  ")
-                val gmmIntentUri =
-                    Uri.parse("geo:0,0?q=${viewModel.personData.value?.lattLoac},${viewModel.personData.value?.longLoca}")
-                Log.d("TAG", "value of location: ${viewModel.personData.value?.lattLoac} ")
-                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-                mapIntent.setPackage("com.google.android.apps.maps")
-                startActivity(mapIntent)
-            }
-        }
+//        binding?.locationCard?.setOnClickListener {
+//            viewModel.personData.observe(viewLifecycleOwner,{
+//            if (it?.lattLoac.isNullOrBlank() && it?.longLoca.isNullOrBlank()) {
+//                Toast.makeText(
+//                    context,
+//                    "go to map and choose your friend location :-)",
+//                    Toast.LENGTH_LONG
+//                ).show()
+//            } else {
+//                Log.d("TAG", "bind: ${it?.longLoca}  ")
+//                val gmmIntentUri =
+//                    Uri.parse("geo:0,0?q=${it?.lattLoac},${it?.longLoca}")
+//                Log.d("TAG", "value of location: ${it?.lattLoac} ")
+//                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+//                mapIntent.setPackage("com.google.android.apps.maps")
+//                startActivity(mapIntent)
+//            }
+//
+//        })}
 
         binding?.locationCard?.setOnLongClickListener {
             val actionMap = PersonInfoFragmentDirections.actionParsoneInfoFragmentToMapsFragment(id,navigationArgs.name)
@@ -166,33 +234,31 @@ class PersonInfoFragment : Fragment() {
                 }
         //endregion kj
 
+
         //region card action for imported
-//        viewModel.personData.observe(viewLifecycleOwner,{personInfo ->
-//            if (personInfo.imported == true ){
+        viewModel.personData.observe(viewLifecycleOwner,{personInfo ->
+           binding?.iportedCard?.setOnClickListener {
+               Log.d("TAG", "imported:${personInfo.imported}")
+           }
+           })
+
+//            if (viewModel.personData.value?.imported == true ){
 //                binding?.importedImage?.playAnimation()}
 //
-//            binding?.importedImage?.setOnClickListener {
-//                if ( personInfo.imported== false ){
-//                    personInfo.imported = true
+//            binding?.iportedCard?.setOnClickListener {
+//                if (viewModel.personData.value?.imported == false ){
+//                    Log.d("TAG", "imported:${viewModel.personData.value?.imported}  ")
+//                    viewModel.personData.value?.imported = true
+//                    Log.d("TAG", "imported change:${viewModel.personData.value?.imported}")
 //                    binding?.importedImage?.playAnimation()}
 //                else{
+//                    Log.d("TAG", "imported:${viewModel.personData.value?.imported}  ")
 //                    viewModel.personData.value?.imported = false
+//                    Log.d("TAG", "imported change = ${viewModel.personData.value?.imported}  ")
 //                    binding?.importedImage?.pauseAnimation()
 //                }
 //            }
-//        })
-//        if (viewModel.personData.value?.imported == true ){
-//        binding?.importedImage?.playAnimation()}
-//
-//        binding?.importedImage?.setOnClickListener {
-//            if (viewModel.personData.value?.imported == false ){
-//                viewModel.personData.value?.imported = true
-//                binding?.importedImage?.playAnimation()}
-//            else{
-//                viewModel.personData.value?.imported = false
-//                binding?.importedImage?.pauseAnimation()
-//            }
-//        }
+
         //endregion
 
 

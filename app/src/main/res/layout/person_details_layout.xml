@@ -124,6 +124,8 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/iportedCard"
+                    android:clickable="true"
                     android:layout_width="0dp"
                     android:layout_height="125dp"
                     android:layout_weight="1"
@@ -145,11 +147,10 @@
                             android:id="@+id/importedImage"
                             android:layout_width="75dp"
                             android:layout_height="75dp"
-                            app:lottie_rawRes="@raw/imported"
-                            app:lottie_autoPlay="false"
-                            app:lottie_loop="false"
                             android:layout_centerInParent="true"
-                            />
+                            app:lottie_loop="false"
+                            app:lottie_rawRes="@raw/stars"
+                            tool:lottie_autoPlay="false" />
                     </RelativeLayout>
 
                 </com.google.android.material.card.MaterialCardView>

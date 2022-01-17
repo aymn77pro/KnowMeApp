@@ -13,7 +13,8 @@ class ViewModelFactory : ViewModelProvider.Factory {
             @Suppress("UNCHEKED_CAST")
             return UserInfoViewModel(
                 providerSetUserInfoUseCase(),
-                providerGetUserInfoUseCase()
+                providerGetUserInfoUseCase(),
+                providerGetPersonDataUseCase()
             ) as T
         } else if (modelClass.isAssignableFrom(PersonViewModel::class.java)) {
             @Suppress("UNCHEKED_CAST")

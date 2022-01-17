@@ -94,7 +94,6 @@ class MapsFragment : Fragment() , OnMapReadyCallback {
                     REQUEST_CODE_PERMISSIONS
                     )
                 }
-
             }
         }
     override fun onDestroyView() {
