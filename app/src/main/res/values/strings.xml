@@ -53,4 +53,7 @@
     <string name="delete_question">Delete %s</string>
     <string name="mapMenu">Map</string>
     <string name="personInfo">Person information</string>
+    <string name="ListOfImported">Imported Pepole</string>
+    <string name="Discard">DISCARD</string>
+    <string name="Cancel">CANCEL</string>
 </resources>

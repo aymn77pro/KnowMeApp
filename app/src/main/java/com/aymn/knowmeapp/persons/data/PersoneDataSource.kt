@@ -20,6 +20,8 @@ class PersoneDataSource(
     val auth = Firebase.auth
 
     //-----------------------------------start setPersonInformation-------------------------------------//
+
+    //region save person details in fire store
     override suspend fun setPersonInformation(personInformation: PersonInformation, uri: Uri?) {
         if (uri == null) {
             updateUserInfo(personInformation, null)
@@ -29,7 +31,9 @@ class PersoneDataSource(
             }
         }
     }
+    //endregion
 
+    //region update person details
     fun updateUserInfo(personInformation: PersonInformation, uri: Uri?) {
         val document = db.collection("users").document("${auth.currentUser?.email}")
             .collection("${auth.currentUser?.email}+persons").document()
@@ -42,7 +46,9 @@ class PersoneDataSource(
         Log.d("TAG", "id: ${personInformation.id}")
         document.set(personInformation)
     }
+    //endregion
 
+    //region show list of contact list
     override suspend fun getPersonsData(): Flow<List<PersonInformation>> = callbackFlow {
 
         db.collection("users").document("${auth.currentUser?.email}")
@@ -57,7 +63,6 @@ class PersoneDataSource(
                     if (it.exists()) {
                         val person = it.toObject(PersonInformation::class.java)
                         list.add(person!!)
-                    } else {
                     }
                 }
 
@@ -67,7 +72,9 @@ class PersoneDataSource(
 
         }
     }
+    //endregion
 
+    //region show person details
     override suspend fun getOnePersonData(id: String): Flow<PersonInformation> = callbackFlow {
 
         Log.d("TAG", "getOnePersonData: $id")
@@ -87,7 +94,9 @@ class PersoneDataSource(
             }
         awaitClose {}
     }
+    //endregion
 
+    //region update person details
     override suspend fun setOnePersonData(
         id: String,
         personInformation: PersonInformation,
@@ -120,6 +129,9 @@ class PersoneDataSource(
         }
     }
 
+    //endregion
+
+    //region delete person data from fire store
     override suspend fun deletePersonData(id: String) {
 
         val document = db.collection("users").document(auth.currentUser?.email.toString())
@@ -132,6 +144,31 @@ class PersoneDataSource(
             Log.d("TAG", "DocumentSnapshot dont deleted! ")
         }
     }
+    //endregion
+
+    //region show only imported people
+    override suspend fun getImportedList(): Flow<List<PersonInformation>> = callbackFlow {
+        db.collection("users").document("${auth.currentUser?.email}")
+            .collection("${auth.currentUser?.email}+persons")
+            .whereEqualTo("imported",true)
+            .addSnapshotListener { snap, e ->
+                if (e != null) {
+                    return@addSnapshotListener
+                }
+                val list = mutableListOf<PersonInformation>()
+
+                snap?.documents?.forEach {
+                    if (it.exists()) {
+                        val person = it.toObject(PersonInformation::class.java)
+                        list.add(person!!)
+                        Log.d("TAG", "getImportedList: ${list.size}")
+                    }
+                }
+                trySend(list)
+            }
+        awaitClose {}
+    }
+    //endregion
 
 //---------------------------------finish setPersonInformation--------------------------------------//
 

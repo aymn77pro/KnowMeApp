@@ -43,3 +43,6 @@ fun providerSetOnePersonDataUseCase(): SetOnePersoneData =
 
 fun providerDeletePersonDataUseCase(): DeletePersonInformationUseCase =
     DeletePersonInformationUseCase(providerPersonRepository())
+
+fun providerGetIportedListUseCase():GetImportedListUseCase =
+    GetImportedListUseCase(providerPersonRepository())

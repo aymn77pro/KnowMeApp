@@ -21,7 +21,7 @@ class ViewModelFactory : ViewModelProvider.Factory {
             return PersonViewModel(
                 providerSetPersonDataUseCase(), providerGetPersonDataUseCase(),
                 providerGetOnePersonDataUseCase(), providerSetOnePersonDataUseCase(),
-                providerDeletePersonDataUseCase()
+                providerDeletePersonDataUseCase(), providerGetIportedListUseCase()
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")

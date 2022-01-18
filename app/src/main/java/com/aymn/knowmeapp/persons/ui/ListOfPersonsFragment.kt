@@ -35,13 +35,24 @@ import kotlinx.coroutines.launch
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val adabter = PesrsonListAdabter(this.requireContext())
+        binding?.recyclerView?.adapter = adabter
+
+        viewModel.getImportedList()
+
     binding?.topAppBar?.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.userProfile -> {
-
                     val actionUserProfile = ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToUserEditInnfoFragment2()
-
                     findNavController().navigate(actionUserProfile)
+                    true
+                }
+                R.id.importedList -> {
+                    viewModel.personsImported.observe(viewLifecycleOwner,{
+                        it.let {
+                            adabter.submitList(it)
+                        }
+                    })
                     true
                 }
                 else -> false
@@ -53,8 +64,7 @@ import kotlinx.coroutines.launch
                     ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToParsoneInfoFragment(name = "Add New Person")
                 findNavController().navigate(action)
             }
-            val adabter = PesrsonListAdabter(this.requireContext())
-            binding?.recyclerView?.adapter = adabter
+
 
             viewModel.persons.observe(viewLifecycleOwner, {
                 it.let {

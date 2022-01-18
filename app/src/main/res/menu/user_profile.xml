@@ -8,4 +8,9 @@
             android:title="@string/user_profile"
             android:icon="@drawable/ic_baseline_account_circle_24"
             />
+        <item
+                android:id="@+id/importedList"
+                app:showAsAction="never"
+                android:title="@string/ListOfImported"
+                />
 </menu>

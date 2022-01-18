@@ -78,7 +78,7 @@ class UserEditInnfoFragment : Fragment() {
             binding.user = it
             binding.executePendingBindings()
         })
-        viewModel.userFriendList.observe(viewLifecycleOwner,{
+        viewModel.userFriendList.observe(viewLifecycleOwner, {
             binding?.countContact?.setText(it.size.toString())
         })
         Glide.with(requireContext()).load(Firebase.auth.currentUser?.photoUrl)
