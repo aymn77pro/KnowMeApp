@@ -56,4 +56,5 @@
     <string name="ListOfImported">Imported Pepole</string>
     <string name="Discard">DISCARD</string>
     <string name="Cancel">CANCEL</string>
+    <string name="Generate">Generate QR code</string>
 </resources>

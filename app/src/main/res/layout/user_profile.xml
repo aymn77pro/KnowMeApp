@@ -120,6 +120,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/qrCodeCard"
                     android:layout_width="0dp"
                     android:layout_height="125dp"
                     android:layout_weight="1"
@@ -130,21 +131,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <TextView
-                            android:id="@+id/imported"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Imported Pepole"
-                            android:layout_centerHorizontal="true" />
-
-                        <TextView
-                            android:id="@+id/countImported"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20sp"
-                            android:text="20"
-                            android:textStyle="bold"
-                            android:layout_centerInParent="true" />
+                        <ImageView
+                            android:id="@+id/qrCodeImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                           />
 
 
                     </RelativeLayout>
@@ -269,6 +260,15 @@
                     android:layout_height="wrap_content"
                     style="@style/Widget.App.Button"
                     android:text="@string/update"
+                    />
+
+                <Button
+                    android:id="@+id/qrGnarete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    style="@style/Widget.App.Button"
+                    android:text="@string/Generate"
                     />
 
             </LinearLayout>
