@@ -300,6 +300,14 @@
                     android:backgroundTint="#D50000"
                     android:text="@string/delete"
                     />
+                <Button
+                    android:id="@+id/readQRcode"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.App.Button"
+                    android:text="@string/ReadQRCode"
+                    />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

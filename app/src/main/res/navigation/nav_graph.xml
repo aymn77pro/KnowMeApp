@@ -81,6 +81,9 @@
             android:name="long"
             app:argType="string"
             android:defaultValue=" " />
+        <action
+            android:id="@+id/action_parsoneInfoFragment_to_scanQRCodeFragment"
+            app:destination="@id/scanQRCodeFragment" />
     </fragment>
     <fragment
         android:id="@+id/editParsoneInfoFragment"
@@ -121,4 +124,9 @@
             android:id="@+id/action_settingsFragment_to_userEditInnfoFragment"
             app:destination="@id/userEditInnfoFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/scanQRCodeFragment"
+        android:name="com.aymn.knowmeapp.persons.ui.ScanQRCodeFragment"
+        android:label="fragment_scan_q_r_code"
+        tools:layout="@layout/fragment_scan_q_r_code" />
 </navigation>

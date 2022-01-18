@@ -57,4 +57,5 @@
     <string name="Discard">DISCARD</string>
     <string name="Cancel">CANCEL</string>
     <string name="Generate">Generate QR code</string>
+    <string name="ReadQRCode">Read QR Codes</string>
 </resources>

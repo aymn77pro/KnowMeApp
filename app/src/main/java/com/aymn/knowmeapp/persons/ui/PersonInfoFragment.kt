@@ -53,6 +53,10 @@ class PersonInfoFragment : Fragment() {
 
 
         if (id != "empty") {
+            binding?.readQRcode?.setOnClickListener {
+                val readQRCode = PersonInfoFragmentDirections.actionParsoneInfoFragmentToScanQRCodeFragment()
+                findNavController().navigate(readQRCode)
+            }
             binding?.delete?.setOnClickListener {
                 showDeleteDialog()
             }
@@ -152,6 +156,10 @@ class PersonInfoFragment : Fragment() {
             }
             //endregion
             binding?.delete?.isVisible = false
+            binding?.readQRcode?.setOnClickListener {
+                val readQRCode = PersonInfoFragmentDirections.actionParsoneInfoFragmentToScanQRCodeFragment()
+                findNavController().navigate(readQRCode)
+            }
         }
 
 
@@ -220,6 +228,10 @@ class PersonInfoFragment : Fragment() {
             binding?.delete?.setOnClickListener {
                 showDeleteDialog()
             }
+            binding?.readQRcode?.setOnClickListener {
+                val readQRCode = PersonInfoFragmentDirections.actionParsoneInfoFragmentToScanQRCodeFragment()
+                findNavController().navigate(readQRCode)
+            }
 //region location
             binding?.locationCard?.setOnLongClickListener {
                 val actionMap =
@@ -260,7 +272,7 @@ class PersonInfoFragment : Fragment() {
         MaterialAlertDialogBuilder(requireContext(),R.style.ThemeOverlay_App_MaterialAlertDialog)
             .setTitle(getString(android.R.string.dialog_alert_title))
             .setMessage(getString(R.string.delete_question, navigationArgs.name))
-            .setCancelable(false)
+            .setCancelable(true)
             .setNegativeButton(getString(R.string.Cancel)) { _, _ -> }
             .setPositiveButton(R.string.Discard) { _, _ ->
                 viewModel.deletePerson(navigationArgs.id)
