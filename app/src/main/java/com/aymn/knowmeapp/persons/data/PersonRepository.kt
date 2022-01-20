@@ -21,7 +21,7 @@ class PersonRepository(private val personeDataSource: PersoneDataSource) {
 
     suspend fun getImportedList() = personeDataSource.getImportedList()
 
-
+        // for search Business logic
     suspend fun searchForPerson(name: String): Flow<List<PersonInformation>> = flow {
         getPersonData().collect { list ->
             emit(list.filter { it.name.contains(name, true) })

@@ -171,7 +171,7 @@ class PersoneDataSource(
     //endregion
 
 //---------------------------------finish setPersonInformation--------------------------------------//
-
+    // upload image to fire base storage
     suspend fun upload(file: Uri): Flow<Uri> = callbackFlow {
 
         val firestore = UUID.randomUUID().toString()

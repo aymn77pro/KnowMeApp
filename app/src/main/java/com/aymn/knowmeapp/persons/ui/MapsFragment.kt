@@ -46,6 +46,7 @@ class MapsFragment : Fragment() , OnMapReadyCallback {
 
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //region map menu
         binding?.topAppBar?.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.saveLocation ->{
@@ -79,6 +80,8 @@ class MapsFragment : Fragment() , OnMapReadyCallback {
             }
 
         }
+        //endregion
+
 
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.myMap) as SupportMapFragment
@@ -100,7 +103,17 @@ class MapsFragment : Fragment() , OnMapReadyCallback {
         super.onDestroyView()
         binding = null
     }
+    @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
+        if (allPermissionsGranted()) {
+            map?.isMyLocationEnabled = true
+        } else {
+            ActivityCompat.requestPermissions(
+                this.requireActivity(),
+                REQUIRED_PERMISSIONS,
+                REQUEST_CODE_PERMISSIONS
+            )
+        }
 
         map = googleMap
         map?.setOnMapClickListener { latLng ->
@@ -127,13 +140,6 @@ class MapsFragment : Fragment() , OnMapReadyCallback {
 
 
     // Checks that users have given permission
-    private fun isPermissionGranted(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            this.requireContext(),
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(

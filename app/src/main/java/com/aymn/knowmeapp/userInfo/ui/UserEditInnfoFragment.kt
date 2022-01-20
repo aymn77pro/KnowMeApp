@@ -55,6 +55,8 @@ class UserEditInnfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //region user menu
         binding?.topAppBar?.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.singOutIcon -> {
@@ -72,9 +74,11 @@ class UserEditInnfoFragment : Fragment() {
             }
 
         }
+        //endregion
 
         auth = Firebase.auth
 
+        //repeat in Resumed
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.getUserInfo()
@@ -93,16 +97,20 @@ class UserEditInnfoFragment : Fragment() {
             binding.user = it
             binding.executePendingBindings()
         })
+
+
         viewModel.userFriendList.observe(viewLifecycleOwner, {
             binding?.countContact?.setText(it.size.toString())
         })
+
+        //i use image from user google account
         Glide.with(requireContext()).load(Firebase.auth.currentUser?.photoUrl)
             .placeholder(R.drawable.loading_animation)
             .circleCrop()
             .error(R.drawable.ic_baseline_account_circle_24)
             .into(binding?.userImage!!)
 
-
+        //upload new or edit data
         binding?.update?.setOnClickListener {
             binding.apply {
                 viewModel.setNewUserInfo(
@@ -118,6 +126,8 @@ class UserEditInnfoFragment : Fragment() {
                 UserEditInnfoFragmentDirections.actionUserEditInnfoFragmentToListOfPersonsFragment()
             findNavController().navigate(action)
         }
+
+        // to save user information in QR Code
         viewModel.user.observe(viewLifecycleOwner, { UserInfo ->
             binding?.qrGnarete?.setOnClickListener {
                 if (UserInfo.name.isNullOrBlank()) {
@@ -148,6 +158,8 @@ class UserEditInnfoFragment : Fragment() {
                 }
 
             }
+
+            //auto update value with out create fragment again for name and  number
             binding?.Name?.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence?,
@@ -183,9 +195,7 @@ class UserEditInnfoFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
 
         })
-}
-
-
+    }
 
 
     private fun singOut() {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.knowmeapp">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -15,7 +16,17 @@
         >
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/icons8_person_24" />
+            android:resource="@drawable/contacts"
+            />
+        <service
+            android:name="com.aymn.knowmeapp.notification.FirebaseMessaging"
+            android:exported="false"
+            tools:ignore="Instantiatable,MissingClass">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCblrQ8IkN6B53q5ps2DJ6xDZgUJrTFs68" />
@@ -31,6 +42,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

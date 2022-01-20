@@ -51,7 +51,7 @@ class PersonInfoFragment : Fragment() {
         viewModel.getOnePerson(id)
 
 
-
+//if the user went to Edit a Person data
         if (id != "empty") {
             binding?.readQRcode?.setOnClickListener {
                 val readQRCode = PersonInfoFragmentDirections.actionParsoneInfoFragmentToScanQRCodeFragment()
@@ -74,7 +74,6 @@ class PersonInfoFragment : Fragment() {
                             Toast.LENGTH_LONG
                         ).show()
                     } else {
-                        Log.d("TAG", "location: ${navigationArgs.latt}+${navigationArgs.long}  ")
                         val gmmIntentUri =
                             Uri.parse("geo:0,0?q=${personData.lattLoac},${personData.longLoca}")
                         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
@@ -113,16 +112,16 @@ class PersonInfoFragment : Fragment() {
 
             })
         } else {
+            // if its New Person
             //region location
             binding?.locationCard?.setOnClickListener {
                 if (navigationArgs.latt.isNullOrBlank() && navigationArgs.long.isNullOrBlank()) {
                     Toast.makeText(
                         context,
-                        "go to map and choose your friend location :-)",
+                        "go to map and choose your friend location :-) PLEASE LONG PRESS to open the map",
                         Toast.LENGTH_LONG
                     ).show()
                 } else {
-                    Log.d("TAG", "location: ${navigationArgs.latt}+${navigationArgs.long}  ")
                     val gmmIntentUri =
                         Uri.parse("geo:0,0?q=${navigationArgs.latt},${navigationArgs.long}")
                     val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
@@ -148,6 +147,7 @@ class PersonInfoFragment : Fragment() {
                         personData.imported = true
                         binding?.importedImage?.playAnimation()
                     } else {
+                        // it is New Person Delete button
                         personData.imported = false
                         binding?.importedImage?.frame = 1
                     }
@@ -213,10 +213,6 @@ class PersonInfoFragment : Fragment() {
                                 imported = personInformation.imported
                             ), fileImage
                         )
-                        Log.d(
-                            "TAG",
-                            "add new person location: ${viewModel.personData.value?.longLoca} "
-                        )
                     }
                     val action =
                         PersonInfoFragmentDirections.actionParsoneInfoFragmentToListOfPersonsFragment()
@@ -243,23 +239,16 @@ class PersonInfoFragment : Fragment() {
                 true
             }
             //endregion
-
-
-            //region card action for imported
-            viewModel.personData.observe(viewLifecycleOwner, { personInfo ->
-                binding?.iportedCard?.setOnClickListener {
-                    Log.d("TAG", "imported:${personInfo.imported}")
-                }
-            })
         }
+        //endregion
     }
-
+// open gallery
     private fun openGalleryForImage() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         startActivityForResult(intent, REQUEST_CODE)
     }
-
+// show the image for the user
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {

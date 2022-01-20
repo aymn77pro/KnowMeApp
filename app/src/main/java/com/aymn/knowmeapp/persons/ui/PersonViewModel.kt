@@ -21,13 +21,14 @@ class PersonViewModel(
     private val getImportedListUseCase: GetImportedListUseCase,
     private val searchUseCase: SearchUseCase
 ) : ViewModel() {
-
+// save all the list came from fire store
     private val _persons = MutableStateFlow<List<PersonInformation>>(emptyList())
     val persons = _persons.asLiveData()
 
+    //save one person data (I KNOW IT'S NOT BAST PRACTICES)
     private val _personData = MutableStateFlow(PersonInformation())
     val personData = _personData.asLiveData()
-
+// save all the list came from fire store and have True value
     private val _personsImported = MutableStateFlow<List<PersonInformation>>(emptyList())
     val personsImported = _personsImported.asLiveData()
 
@@ -47,14 +48,7 @@ class PersonViewModel(
         }
     }
 
-//    fun getPersonDataSearch(query : String) {
-//        viewModelScope.launch {
-//            getPersonDataUseCase.invoke().collect { persons ->
-//                _persons.update { persons }
-//            }
-//        }
-//        _persons.find
-//    }
+
 
     fun getOnePerson(id: String) {
         viewModelScope.launch {

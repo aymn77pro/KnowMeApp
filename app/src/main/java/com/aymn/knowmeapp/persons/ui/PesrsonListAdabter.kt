@@ -30,36 +30,32 @@ class PesrsonListAdabter(private val context: Context) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): PesrsonListAdabter.PersonViewHolder {
-        return PesrsonListAdabter.PersonViewHolder(
+    ): PersonViewHolder {
+        return PersonViewHolder(
             PersonItem1Binding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
-    override fun onBindViewHolder(holder: PesrsonListAdabter.PersonViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
         val current = getItem(position)
 
         holder.binding.name.text = current.name
 
-//        Glide.with(context).load(current.imageUri.toUri())
-//            .placeholder(R.drawable.loading_animation).error(R.drawable.ic_baseline_account_circle_24)
-//            .into(holder.binding.img)
 
          holder.binding
-            .root.setOnClickListener {
+            .cerdView.setOnClickListener {
             val action =
                 ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToParsoneInfoFragment(
                     current.id,current.name,current.lattLoac.toString(),current.longLoca.toString())
             Log.d("TAG", "current id = ${current.id}")
             holder.itemView.findNavController().navigate(action)
         }
-        Log.d("TAG", "onBindViewHolder:${current.name}+${current.lattLoac}+${current.longLoca}")
 
-
+        //show person Image
        Glide.with(context).load(current.imageUri.toUri()).circleCrop().placeholder(R.drawable.loading_animation)
            .error(R.drawable.ic_baseline_account_circle_24).into(holder.binding.presonImage)
         }
-
+// to camper between
     companion object {
         private val DiffCallBack = object : DiffUtil.ItemCallback<PersonInformation>() {
             override fun areItemsTheSame(

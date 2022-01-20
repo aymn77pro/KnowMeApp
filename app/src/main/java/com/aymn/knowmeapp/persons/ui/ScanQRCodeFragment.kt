@@ -31,9 +31,6 @@ class ScanQRCodeFragment : Fragment() {
 
     private lateinit var codesScanner : CodeScanner
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

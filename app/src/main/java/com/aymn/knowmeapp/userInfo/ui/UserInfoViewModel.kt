@@ -18,9 +18,11 @@ class UserInfoViewModel(
     private val getUserInfoUseCase: GetUserInfoUseCase,
     private val getPersonDataUseCase: GetPersonDataUseCase
 ) : ViewModel() {
+    //save user information
     private val _user = MutableStateFlow(UserInformation())
     val user = _user.asLiveData()
 
+//how many friends the user save
     private val _userFriendList = MutableStateFlow<List<PersonInformation>>(emptyList())
     val userFriendList = _userFriendList.asLiveData()
 

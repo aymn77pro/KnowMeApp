@@ -1,7 +1,9 @@
 package com.aymn.knowmeapp.persons.ui
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -10,12 +12,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.aymn.knowmeapp.ViewModelFactory
-import com.aymn.knowmeapp.network.model.PersonInformation
 import com.example.knowmeapp.R
 import com.example.knowmeapp.databinding.FragmentListOfPersonsBinding
 import kotlinx.coroutines.launch
 
-    class ListOfPersonsFragment : Fragment() {
+class ListOfPersonsFragment : Fragment() {
 
     private val viewModel: PersonViewModel by activityViewModels {
         ViewModelFactory()
@@ -30,7 +31,7 @@ import kotlinx.coroutines.launch
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentListOfPersonsBinding.inflate(inflater, container, false)
-            setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
         return binding?.root
     }
 
@@ -41,16 +42,17 @@ import kotlinx.coroutines.launch
         binding?.recyclerView?.adapter = adabter
 
         viewModel.getImportedList()
-
-    binding?.topAppBar?.setOnMenuItemClickListener { menuItem ->
+        //for menu and the icon
+        binding?.topAppBar?.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.userProfile -> {
-                    val actionUserProfile = ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToUserEditInnfoFragment2()
+                    val actionUserProfile =
+                        ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToUserEditInnfoFragment2()
                     findNavController().navigate(actionUserProfile)
                     true
                 }
                 R.id.importedList -> {
-                    viewModel.personsImported.observe(viewLifecycleOwner,{
+                    viewModel.personsImported.observe(viewLifecycleOwner, {
                         it.let {
                             adabter.submitList(it)
                         }
@@ -58,7 +60,7 @@ import kotlinx.coroutines.launch
                     true
                 }
                 R.id.showAll -> {
-                    viewModel.persons.observe(viewLifecycleOwner,{
+                    viewModel.persons.observe(viewLifecycleOwner, {
                         it.let {
                             adabter.submitList(it)
                         }
@@ -68,34 +70,30 @@ import kotlinx.coroutines.launch
                 else -> false
             }
         }
-        viewModel.persons.observe(viewLifecycleOwner,{ personList ->
+        // Give the adapter your list of contact
+        viewModel.persons.observe(viewLifecycleOwner, { personList ->
 
-                adabter.submitList(personList)
+            adabter.submitList(personList)
 
         })
-            binding?.addParsone?.setOnClickListener {
-                val action =
-                    ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToParsoneInfoFragment(name = "Add New Person")
-                findNavController().navigate(action)
-            }
+        binding?.addParsone?.setOnClickListener {
+            val action =
+                ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToParsoneInfoFragment(
+                    name = "Add New Person"
+                )
+            findNavController().navigate(action)
+        }
 
-
-            viewModel.persons.observe(viewLifecycleOwner, {
-                it.let {
-                    adabter.submitList(it)
-                }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.getPersonData()
             }
-            )
-            lifecycleScope.launch {
-                repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                    viewModel.getPersonData()
-                }
-            }
+        }
 
         binding?.search?.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-            return false
+                return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
@@ -110,22 +108,10 @@ import kotlinx.coroutines.launch
         })
 
 
-//        android.widget.SearchView.OnQueryTextListener{
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                viewModel.getPersonDataSearch(query!!)
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                viewModel.getPersonDataSearch(newText!!)
-//                return true
-//            }
-//
-//        })
-        }
-
-        override fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
-        }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

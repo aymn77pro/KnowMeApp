@@ -17,10 +17,13 @@ import java.util.*
 class UserInfoDataSource(
     private val firebaseDB: FirebaseFirestore,
 ) : UserInfo {
+    //region save user information
     //---------------------------------setUserInfo-----------------------------------------------//
     val db = firebaseDB
     val auth = Firebase.auth
+
     override suspend fun setUserInfo(userInfo: UserInformation) {
+
             val user = db.collection("users").document("${auth.currentUser?.email}")
             user.set(userInfo).addOnCompleteListener {
                 Log.d("TAG", "setUserInfo: ${it.isSuccessful}")
@@ -28,8 +31,9 @@ class UserInfoDataSource(
                 Log.e("TAG", "image dont save: ${userInfo} ",)
             }
         }
+//endregion
 
-        //---------------------------------------------------------------------------------------------------------------------//
+    //region show user information
         override suspend fun getUserInfo(): Flow<UserInformation> = callbackFlow {
             db.collection("users").document("${auth.currentUser?.email}").get()
                 .addOnSuccessListener {
@@ -47,5 +51,7 @@ class UserInfoDataSource(
                 }
             awaitClose {}
         }
+    //endregion
+
 }
 
