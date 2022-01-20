@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">KnowMeApp</string>
     <!-- Strings related to login -->
-    <string name="web_clint_id">366299009420-v3n82kjgnr87ldcgmbd4l2dsahui4uuc.apps.googleusercontent.com</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="web_clint_id" translatable="false">366299009420-v3n82kjgnr87ldcgmbd4l2dsahui4uuc.apps.googleusercontent.com</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="user_profile">user profile</string>
     <string name="sing_out">sing out</string>
     <string name="name">name:</string>
@@ -13,17 +13,17 @@
     <string name="twitter_account">Twitter account:</string>
     <string name="facebook_account">FaceBook account:</string>
     <string name="back">Back</string>
-    <string name="dark_theme_preference_value">Dark_theme</string>
-    <string name="light_theme_preference_value">Light_Theme</string>
-    <string name="system_theme_preference_value">System_Theme</string>
+    <string name="dark_theme_preference_value" translatable="false">Dark_theme</string>
+    <string name="light_theme_preference_value" translatable="false">Light_Theme</string>
+    <string name="system_theme_preference_value" translatable="false">System_Theme</string>
     <string name="add_person">Add Person</string>
     <string name="normal_map">Normal Map</string>
     <string name="hybrid_map">Hybrid Map</string>
     <string name="satellite_map">Satellite Map</string>
     <string name="terrain_map">Terrain Map</string>
-    <string name="lat_long_snippet">Lat: %1$.5f, Long: %2$.5f</string>
+    <string name="lat_long_snippet" translatable="false">Lat: %1$.5f, Long: %2$.5f</string>
     <string name="dropped_pin">Dropped Pin</string>
-    <string name="poi">poi</string>
+    <string name="poi" translatable="false">poi</string>
     <string name="setting">Setting</string>
     <string name="location">Location</string>
     <!-- Preference Titles -->
@@ -32,21 +32,21 @@
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <string name="reply_title" translatable="false">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    <string name="sync_title" translatable="false">Sync email periodically</string>
+    <string name="attachment_title" translatable="false">Download incoming attachments</string>
+    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
     </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
     <string name="theme_preferences_key">My Prefrence</string>
     <string name="dark_theme_description">Descripe</string>
-    <string name="light_theme_description">theme style</string>
-    <string name="system_theme_description">origin theme</string>
+    <string name="light_theme_description" translatable="false">theme style</string>
+    <string name="system_theme_description" translatable="false">origin theme</string>
     <string name="update">UPDATE</string>
     <string name="friends_and_family">friends and family</string>
-    <string name="page_title">my list</string>
+    <string name="page_title">Pepole You know</string>
     <string name="imported_person">Imported</string>
     <string name="edit">EDIT</string>
     <string name="delete">DELETE</string>
@@ -58,4 +58,5 @@
     <string name="Cancel">CANCEL</string>
     <string name="Generate">Generate QR code</string>
     <string name="ReadQRCode">Read QR Codes</string>
+    <string name="ShowAll">Show All</string>
 </resources>

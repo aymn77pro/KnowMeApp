@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.aymn.knowmeapp.ViewModelFactory
 import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.DecodeCallback
@@ -19,6 +21,11 @@ import kotlinx.coroutines.launch
 
 
 class ScanQRCodeFragment : Fragment() {
+
+    private val viewModel:PersonViewModel by activityViewModels {
+        ViewModelFactory()
+    }
+
  private var _binding:FragmentScanQRCodeBinding? = null
     val binding get() = _binding
 
@@ -89,11 +96,15 @@ class ScanQRCodeFragment : Fragment() {
        codesScanner.scanMode = ScanMode.SINGLE
        codesScanner.isAutoFocusEnabled = true
        codesScanner.isFlashEnabled = false
-        codesScanner.decodeCallback = DecodeCallback {
+
+            codesScanner.decodeCallback = DecodeCallback {
                 lifecycleScope.launch {
                     Toast.makeText(context, "scan Result : ${it.text}", Toast.LENGTH_LONG).show()
+
                 }
-        }
+            }
+
+
         codesScanner.errorCallback = ErrorCallback {
             lifecycleScope.launch {
                 Toast.makeText(

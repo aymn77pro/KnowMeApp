@@ -39,7 +39,7 @@ class PesrsonListAdabter(private val context: Context) :
     override fun onBindViewHolder(holder: PesrsonListAdabter.PersonViewHolder, position: Int) {
         val current = getItem(position)
 
-        holder.binding.name.text = current.Name
+        holder.binding.name.text = current.name
 
 //        Glide.with(context).load(current.imageUri.toUri())
 //            .placeholder(R.drawable.loading_animation).error(R.drawable.ic_baseline_account_circle_24)
@@ -49,11 +49,11 @@ class PesrsonListAdabter(private val context: Context) :
             .root.setOnClickListener {
             val action =
                 ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToParsoneInfoFragment(
-                    current.id,current.Name,current.lattLoac.toString(),current.longLoca.toString())
+                    current.id,current.name,current.lattLoac.toString(),current.longLoca.toString())
             Log.d("TAG", "current id = ${current.id}")
             holder.itemView.findNavController().navigate(action)
         }
-        Log.d("TAG", "onBindViewHolder:${current.Name}+${current.lattLoac}+${current.longLoca}")
+        Log.d("TAG", "onBindViewHolder:${current.name}+${current.lattLoac}+${current.longLoca}")
 
 
        Glide.with(context).load(current.imageUri.toUri()).circleCrop().placeholder(R.drawable.loading_animation)
@@ -66,7 +66,7 @@ class PesrsonListAdabter(private val context: Context) :
                 oldItem: PersonInformation,
                 newItem: PersonInformation
             ): Boolean {
-                return oldItem.Name === newItem.Name
+                return oldItem.name === newItem.name
             }
 
             override fun areContentsTheSame(

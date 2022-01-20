@@ -13,4 +13,9 @@
                 app:showAsAction="never"
                 android:title="@string/ListOfImported"
                 />
+        <item
+                android:id="@+id/showAll"
+                app:showAsAction="never"
+                android:title="@string/ShowAll"
+                />
 </menu>

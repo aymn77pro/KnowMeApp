@@ -5,9 +5,9 @@ import androidx.core.net.toUri
 import com.google.firebase.firestore.GeoPoint
 
 data class PersonInformation(
-    var Name: String = "",
-    var Number: String = "",
-    var Email: String = "",
+    val name: String = "",
+    val number: String = "",
+    val email: String = "",
     val linkIn: String = "",
     val twitter: String = "",
     val faceBook: String = "",

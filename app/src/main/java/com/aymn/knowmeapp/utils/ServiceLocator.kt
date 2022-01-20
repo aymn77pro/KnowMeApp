@@ -6,6 +6,7 @@ import com.aymn.knowmeapp.persons.domain.*
 import com.aymn.knowmeapp.userInfo.data.UserInfoDataSource
 import com.aymn.knowmeapp.userInfo.data.UserInfoRepository
 import com.aymn.knowmeapp.userInfo.domain.GetUserInfoUseCase
+import com.aymn.knowmeapp.userInfo.domain.SearchUseCase
 import com.aymn.knowmeapp.userInfo.domain.SetUserInfoUseCase
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -46,3 +47,5 @@ fun providerDeletePersonDataUseCase(): DeletePersonInformationUseCase =
 
 fun providerGetIportedListUseCase():GetImportedListUseCase =
     GetImportedListUseCase(providerPersonRepository())
+
+fun providerSearchUseCase():SearchUseCase = SearchUseCase(providerPersonRepository())

@@ -27,7 +27,7 @@ android {
         minSdk 28
         targetSdk 31
         versionCode 1
-        versionName "3.0"
+        versionName "4.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -127,8 +127,9 @@ dependencies {
 
     //QR generate
     implementation 'com.journeyapps:zxing-android-embedded:3.0.2@aar'
-    implementation 'com.google.zxing:core:3.2.0'
+    implementation 'com.google.zxing:core:3.3.3'
     implementation 'com.budiyev.android:code-scanner:2.1.0'
+    implementation 'com.google.code.gson:gson:2.8.8'
 
 
 

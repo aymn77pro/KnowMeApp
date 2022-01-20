@@ -86,7 +86,7 @@ class PersonInfoFragment : Fragment() {
                     val selectLocation =
                         PersonInfoFragmentDirections.actionParsoneInfoFragmentToMapsFragment(
                             id = id,
-                            name = personData.Name
+                            name = personData.name
                         )
                     findNavController().navigate(selectLocation)
                     true
@@ -179,9 +179,9 @@ class PersonInfoFragment : Fragment() {
                     if (id != "empty") {
                         viewModel.setOnePerson(
                             id, PersonInformation(
-                                Name = binding?.Name?.text.toString(),
-                                Number = binding?.userNumber?.text.toString(),
-                                Email = binding?.email?.text.toString(),
+                                name = binding?.Name?.text.toString(),
+                                number = binding?.userNumber?.text.toString(),
+                               email = binding?.email?.text.toString(),
                                 linkIn = binding?.linkIn?.text.toString(),
                                 twitter = binding?.twitter?.text.toString(),
                                 faceBook = binding?.faceBook?.text.toString(),
@@ -271,7 +271,7 @@ class PersonInfoFragment : Fragment() {
     private fun showDeleteDialog() {
         MaterialAlertDialogBuilder(requireContext(),R.style.ThemeOverlay_App_MaterialAlertDialog)
             .setTitle(getString(android.R.string.dialog_alert_title))
-            .setMessage(getString(R.string.delete_question, navigationArgs.name))
+            .setMessage(getString(R.string.delete_question))
             .setCancelable(true)
             .setNegativeButton(getString(R.string.Cancel)) { _, _ -> }
             .setPositiveButton(R.string.Discard) { _, _ ->

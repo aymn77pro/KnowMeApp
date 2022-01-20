@@ -2,6 +2,7 @@ package com.aymn.knowmeapp.persons.ui
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -9,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.aymn.knowmeapp.ViewModelFactory
+import com.aymn.knowmeapp.network.model.PersonInformation
 import com.example.knowmeapp.R
 import com.example.knowmeapp.databinding.FragmentListOfPersonsBinding
 import kotlinx.coroutines.launch
@@ -55,10 +57,22 @@ import kotlinx.coroutines.launch
                     })
                     true
                 }
+                R.id.showAll -> {
+                    viewModel.persons.observe(viewLifecycleOwner,{
+                        it.let {
+                            adabter.submitList(it)
+                        }
+                    })
+                    true
+                }
                 else -> false
             }
         }
+        viewModel.persons.observe(viewLifecycleOwner,{ personList ->
 
+                adabter.submitList(personList)
+
+        })
             binding?.addParsone?.setOnClickListener {
                 val action =
                     ListOfPersonsFragmentDirections.actionListOfPersonsFragmentToParsoneInfoFragment(name = "Add New Person")
@@ -77,7 +91,39 @@ import kotlinx.coroutines.launch
                     viewModel.getPersonData()
                 }
             }
+
+        binding?.search?.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+            return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    viewModel.search(it)
+                }
+                return true
+
+            }
+
+
+        })
+
+
+//        android.widget.SearchView.OnQueryTextListener{
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                viewModel.getPersonDataSearch(query!!)
+//                return true
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                viewModel.getPersonDataSearch(newText!!)
+//                return true
+//            }
+//
+//        })
         }
+
         override fun onDestroyView() {
             super.onDestroyView()
             _binding = null
