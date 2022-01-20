@@ -39,7 +39,7 @@ Application store each user information and social accounts. the Main idea of th
  
  ## Prototype
  <img src="https://user-images.githubusercontent.com/92260224/150358821-60840514-1cb4-4cd3-8843-e71226fd47cc.jpg" width="300" height="600" />
- <img src="https://user-images.githubusercontent.com/92260224/150358833-eb5d3d1d-8ed3-40b0-847d-7921299c1ca7.jpg" width="300" height="600" />
+ <img src="https://user-images.githubusercontent.com/92260224/150361062-dad4372e-25fc-48a5-8225-aa2398075538.jpg" width="300" height="600" />
  <img src="https://user-images.githubusercontent.com/92260224/150358849-3894e9d2-2986-4bac-baa0-da59ce69cb45.jpg" width="300" height="600" />
  <img src="https://user-images.githubusercontent.com/92260224/150358861-c6045c21-1f1e-4213-a5af-4409e349f8e6.jpg" width="300" height="600" />
  <img src="https://user-images.githubusercontent.com/92260224/150358875-b52c24b6-7501-4acf-b124-bb6acd996dcd.jpg" width="300" height="600" />
