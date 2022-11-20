@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "366299009420",
+    "project_id": "knowmeapp-85b1d",
+    "storage_bucket": "knowmeapp-85b1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366299009420:android:ea9af334ad3163647346a9",
+        "android_client_info": {
+          "package_name": "com.aymn.knowmeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "366299009420-v3n82kjgnr87ldcgmbd4l2dsahui4uuc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD7El-w0orw6PBeaKhEwiKbkQhJP8V_Ws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "366299009420-v3n82kjgnr87ldcgmbd4l2dsahui4uuc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

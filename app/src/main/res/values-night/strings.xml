@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="user_profile">user profile</string>
+    <string name="sing_out">sing out</string>
+    <string name="name">name:</string>
+    <string name="email">Email:</string>
+    <string name="change_user_info">change user info</string>
+    <string name="phone_number">Phone Number:</string>
+    <string name="linkin_account">LinkIn account:</string>
+    <string name="twitter_account">Twitter account:</string>
+    <string name="facebook_account">FaceBook account:</string>
+    <string name="back">Back</string>
+    <string name="add_person">Add Person</string>
+    <string name="setting">Setting</string>
+    <string name="location">Location</string>
+</resources>

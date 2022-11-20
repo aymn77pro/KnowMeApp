@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KnowMeApp</string>
+    <string name="user_profile">ملف الشخصي</string>
+    <string name="sing_out">تسجيل خروج</string>
+    <string name="name">الاسم</string>
+    <string name="email">الايميل</string>
+    <string name="change_user_info">عدل الملف الشخصي</string>
+    <string name="phone_number">رقم الجوال</string>
+    <string name="linkin_account">حساب لنك ان</string>
+    <string name="twitter_account">حساب تويتر</string>
+    <string name="facebook_account">حساب فيسبوك</string>
+    <string name="back">ارجع</string>
+    <string name="add_person">ضيف شخص</string>
+    <string name="normal_map">خريطه</string>
+    <string name="hybrid_map">خريطه هايبرد</string>
+    <string name="satellite_map">خريطه من الستلايت</string>
+    <string name="terrain_map">خريطة خطية</string>
+    <string name="dropped_pin">اختار موقع</string>
+    <string name="location">موقع</string>
+    <string name="messages_header">رساله</string>
+    <string name="sync_header">اقتران</string>
+    <string name="signature_title">توقيعك</string>
+    <string name="theme_preferences_key">اعداداتي</string>
+    <string name="dark_theme_description">وصف</string>
+    <string name="update">تعديل</string>
+    <string name="friends_and_family">العائله و الاصدقاء</string>
+    <string name="page_title">معارفي</string>
+    <string name="imported_person">مهم</string>
+    <string name="edit">عدل</string>
+    <string name="delete">احذف</string>
+    <string name="delete_question">احذف</string>
+    <string name="mapMenu">خريطه</string>
+    <string name="personInfo">معلومات عن الشخص</string>
+    <string name="ListOfImported">اشخاص مهمين</string>
+    <string name="Discard">اخذف</string>
+    <string name="Cancel">الغاء</string>
+    <string name="Generate">"انشاء الباركود "</string>
+    <string name="ReadQRCode">اقراء الباركود</string>
+    <string name="setting">الاعدادات</string>
+    <string name="ShowAll">اظهار الكل</string>
+</resources>
